@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>TAO Clean — Kids Gifting Endcards</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Helvetica Neue',sans-serif;background:#F6F2EC;color:#133A4A;padding:24px}
+h1{font-weight:700;font-size:22px}
+.sub{color:#5e6e76;font-size:13px;margin:6px 0 10px}
+.bar{display:flex;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+.bar label{font-size:13px}
+.bar input,.bar button{font:inherit;padding:4px 8px;border:1px solid #d7d0c4;border-radius:6px;background:#fff}
+.row{display:flex;gap:18px;flex-wrap:wrap}
+.cell{width:300px}
+.meta{font-size:12.5px;line-height:1.45;margin-bottom:6px}
+.num{font-weight:700}
+.fn{color:#8d9aa1;font-size:11px;word-break:break-all}
+.phone{width:300px;height:533px;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(19,58,74,.2);background:#133A4A}
+iframe{width:300px;height:533px;border:0;display:block}
+#fs{display:none}
+@media(max-width:700px){
+ body{padding:0;background:#0d2630}
+ h1,.sub,.bar,.meta,.row{display:none}
+ #fs{display:block;position:fixed;inset:0}
+ #fs iframe{width:100%;height:100%;border:0}
+ .nav{position:fixed;top:50%;transform:translateY(-50%);z-index:10;background:rgba(19,58,74,.8);color:#fff;border:0;font-size:26px;width:46px;height:46px;border-radius:99px}
+ #prev{left:8px} #next{right:8px}
+ #count{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:10;background:rgba(19,58,74,.8);color:#fff;font-size:13px;padding:5px 12px;border-radius:99px}
+}
+</style></head><body>
+<h1>TAO Clean — Kids Gifting Endcards</h1>
+<div class="sub">3 concepts · parent-gifting-a-kid angle (UMMA KIDS) · open <b>#N</b> in the URL to jump to a concept · campaign line renders from the viewer&rsquo;s device date</div>
+<div class="bar"><label>Preview a promo date: <input type="date" id="pd"></label><button id="pdgo">Apply</button></div>
+<div class="row"><div class="cell" id="c1">
+<div class="meta"><span class="num">#1</span> Quiz · Which little one are you gifting?<br><span class="fn">44-quiz-which-kid-DynamicDate.html</span></div>
+<div class="phone"><iframe loading="lazy" data-src="44-quiz-which-kid-DynamicDate.html" title="44-quiz-which-kid-DynamicDate.html"></iframe></div>
+</div><div class="cell" id="c2">
+<div class="meta"><span class="num">#2</span> Tap the bow · kid-feature reveal<br><span class="fn">45-tap-the-bow-kids-DynamicDate.html</span></div>
+<div class="phone"><iframe loading="lazy" data-src="45-tap-the-bow-kids-DynamicDate.html" title="45-tap-the-bow-kids-DynamicDate.html"></iframe></div>
+</div><div class="cell" id="c3">
+<div class="meta"><span class="num">#3</span> Scratch the gift tag · To: your little artist<br><span class="fn">46-scratch-the-gift-tag-kids-DynamicDate.html</span></div>
+<div class="phone"><iframe loading="lazy" data-src="46-scratch-the-gift-tag-kids-DynamicDate.html" title="46-scratch-the-gift-tag-kids-DynamicDate.html"></iframe></div>
+</div></div>
+<div id="fs"><button class="nav" id="prev">&#8249;</button><iframe id="fsframe" title="endcard"></iframe><button class="nav" id="next">&#8250;</button><div id="count"></div></div>
+<script>
+var files=["44-quiz-which-kid-DynamicDate.html", "45-tap-the-bow-kids-DynamicDate.html", "46-scratch-the-gift-tag-kids-DynamicDate.html"];
+var q='';
+function loadAll(){document.querySelectorAll('iframe[data-src]').forEach(function(f){f.src=f.dataset.src+'?b=1795044957'+q})}
+loadAll();
+document.getElementById('pdgo').onclick=function(){var v=document.getElementById('pd').value;q=v?('&promo-date='+v):'';loadAll();if(mob)show(idx)};
+var mob=matchMedia('(max-width:700px)').matches,idx=0;
+function show(i){idx=(i+files.length)%files.length;document.getElementById('fsframe').src=files[idx]+'?b=1795044957'+q;document.getElementById('count').textContent=(idx+1)+' / '+files.length;location.hash='#'+(idx+1)}
+if(mob){var h=parseInt(location.hash.slice(1));show(isNaN(h)?0:h-1);
+document.getElementById('prev').onclick=function(){show(idx-1)};
+document.getElementById('next').onclick=function(){show(idx+1)};}
+else{var h=parseInt(location.hash.slice(1));if(!isNaN(h)){var el=document.getElementById('c'+h);if(el)el.scrollIntoView()}}
+</script></body></html>
