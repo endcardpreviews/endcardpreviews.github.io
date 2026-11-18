@@ -64,8 +64,8 @@ img{pointer-events:none}
 #amain{flex:1;display:flex;flex-direction:column;min-height:0;padding:calc(var(--u)*2.5) calc(var(--u)*4) 0}
 #heroWrap{position:relative;flex:1;min-height:0;border-radius:calc(var(--u)*2.5);overflow:hidden;background:var(--warm)}
 #hero{width:100%;height:100%;object-fit:cover;display:block}
-#inset{position:absolute;left:calc(var(--u)*3);right:calc(var(--u)*3);bottom:calc(var(--u)*3);height:calc(var(--u)*31);border-radius:calc(var(--u)*2.2);overflow:hidden;background:var(--cream);box-shadow:0 calc(var(--u)*1) calc(var(--u)*4) rgba(30,32,25,.25)}
-#offer{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--u)*2)}
+#inset{position:absolute;left:calc(var(--u)*3);right:calc(var(--u)*3);bottom:calc(var(--u)*3);height:calc(var(--u)*28);border-radius:calc(var(--u)*2.2);overflow:hidden;background:var(--cream);box-shadow:0 calc(var(--u)*1) calc(var(--u)*4) rgba(30,32,25,.25)}
+#offer{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:calc(var(--u)*3.5)}
 #scratch{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:pointer}
 html.done #scratch{opacity:0;transition:opacity .5s;pointer-events:none}
 #pstrip{flex:0 0 auto;display:flex;align-items:center;gap:calc(var(--u)*2);padding-top:calc(var(--u)*2)}
@@ -88,11 +88,9 @@ html.done #scratch{opacity:0;transition:opacity .5s;pointer-events:none}
   <div class="sticker tl"><div>70%</div><div>OFF</div></div>
   <div id="inset">
    <div id="offer">
-    <div class="was"><s>60% off</s> &rarr; 70% off</div>
-    <div class="offbig" style="font-size:calc(var(--u)*5.4);margin-top:calc(var(--u)*0.5)">+ FREE <span class="it">Deluxe</span> Welcome Kit*</div>
-    <div style="margin-top:calc(var(--u)*1.2)"><span class="vb">$90 value</span></div>
-    <div class="urg" style="font-size:calc(var(--u)*3.2);margin-top:calc(var(--u)*1)">Our biggest discount of the year.</div>
-    <div class="ltd" style="margin-top:calc(var(--u)*0.8)">Limited time only</div>
+    <div class="offbig" style="font-size:calc(var(--u)*6);line-height:1.1">+ FREE <span class="it">Deluxe</span><br>Welcome Kit*</div>
+    <div style="margin-top:calc(var(--u)*1.6)"><span class="vb">$90 value</span></div>
+    <div class="urg" style="font-size:calc(var(--u)*3.3);margin-top:calc(var(--u)*1.4)">Our biggest discount of the year.</div>
    </div>
    <canvas id="scratch" class="ia" data-qa="scratch"></canvas>
   </div>
