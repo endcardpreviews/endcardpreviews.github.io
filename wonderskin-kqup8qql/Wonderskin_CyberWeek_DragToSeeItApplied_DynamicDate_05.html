@@ -100,6 +100,14 @@ html.done .capR{opacity:0}
   var lead=day===0?'Black Friday':day===3?'Cyber Monday':(day>=-14&&day<=9)?'Today':'Limited time';
   window.PROMO={date:d,day:day,lead:lead};
   [].forEach.call(document.querySelectorAll('[data-dd]'),function(e){ e.textContent=lead+' · '+MON[d.getMonth()]+' '+d.getDate(); });
+  /* finer date slots, so nothing has to hard-code a day:
+     [data-dd-day] the number, [data-dd-mon] the month, [data-dd-phase] where we
+     are in Cyber Week. No element asserts an end date. */
+  var phase = day===0?'Black Friday':day===3?'Cyber Monday':(day>0&&day<3)?'Cyber Weekend'
+            : (day>3&&day<=9)?'Last chance':(day>=-14&&day<0)?'Cyber Week':'Limited time';
+  [].forEach.call(document.querySelectorAll('[data-dd-day]'),function(e){ e.textContent=d.getDate(); });
+  [].forEach.call(document.querySelectorAll('[data-dd-mon]'),function(e){ e.textContent=MON[d.getMonth()].charAt(0)+MON[d.getMonth()].slice(1).toLowerCase(); });
+  [].forEach.call(document.querySelectorAll('[data-dd-phase]'),function(e){ e.textContent=phase; });
   /* click-through: the campaign's click URL via MRAID; the fallback is only for a plain browser preview */
   var last=-1e9;
   window.OPEN=function(){ var t=Date.now(); if(t-last<250) return; last=t; var u=window.clickTag||window.clickTag1||'', m=window.mraid;
