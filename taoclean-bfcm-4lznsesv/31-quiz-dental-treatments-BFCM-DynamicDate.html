@@ -101,10 +101,23 @@ html.done .vt{opacity:1}html.done .tc{transform:scale(1.03)}
 .tcbow svg{width:100%;height:auto;display:block}
 @keyframes bfnod{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(3deg)}}
 html.done .tcbow{animation:none}
+/* heading trimmed to match the rest of the batch */
+.bar{height:62px !important;padding:10px 14px 0 !important}
+.bar .bf{font-size:19px !important}
+.bar .ea{font-size:8px !important;letter-spacing:.2em !important;padding:0 0 0 9px !important;margin-left:9px !important;border-left:1px solid rgba(246,241,231,.3) !important}
+.bar .r2{font-size:11px !important;margin-top:8px !important;display:flex;align-items:center;justify-content:center;gap:7px}
+.bar .r2 em{font-size:12.5px !important}
+.bar .r3{display:inline-flex !important;margin:0 0 0 3px !important;padding-left:9px;
+ border-left:1px solid rgba(246,241,231,.22);gap:6px !important}
+.bar .ends{font-size:8px !important;letter-spacing:.17em !important}
+.tm .u{padding:0 !important;background:none !important;border:0 !important;gap:0 !important}
+.tm b{font-size:12px !important;min-width:14px !important}
+.tm i{display:none !important}
+.tm .c{font-size:10px !important}
 </style>
 </head>
 <body>
-<div id="cv"><div class="bar"><div class="r1"><span class="bf">Black Friday</span><span class="ea" id="bfDate">SALE</span></div><div class="r2">Up to <em>60% OFF</em> + <strong>FREE Gifts</strong> with every brush</div><div class="r3"><span class="ends">SALE ENDS IN</span><span class="tm" role="timer"><span class="u"><b id="tH">02</b><i>HRS</i></span><span class="c">:</span><span class="u"><b id="tM">30</b><i>MIN</i></span><span class="c">:</span><span class="u"><b id="tS">00</b><i>SEC</i></span></span></div></div><div class="top"><svg class="logo" aria-hidden="true" focusable="false" id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 330.73 56.01">
+<div id="cv"><div class="bar"><div class="r1"><span class="bf">Black Friday</span><span class="ea" id="bfDate">NOV 19</span></div><div class="r2"><em>60% OFF</em> + <strong>FREE GIFTS</strong></div><div class="r3"><span class="ends">ENDS IN</span><span class="tm" role="timer"><span class="u"><b id="tH">02</b><i>HRS</i></span><span class="c">:</span><span class="u"><b id="tM">30</b><i>MIN</i></span><span class="c">:</span><span class="u"><b id="tS">00</b><i>SEC</i></span></span></div></div><div class="top"><svg class="logo" aria-hidden="true" focusable="false" id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 330.73 56.01">
   
   <defs>
     <style>
@@ -123,6 +136,19 @@ html.done .tcbow{animation:none}
 .tcbow svg{width:100%;height:auto;display:block}
 @keyframes bfnod{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(3deg)}}
 html.done .tcbow{animation:none}
+/* heading trimmed to match the rest of the batch */
+.bar{height:62px !important;padding:10px 14px 0 !important}
+.bar .bf{font-size:19px !important}
+.bar .ea{font-size:8px !important;letter-spacing:.2em !important;padding:0 0 0 9px !important;margin-left:9px !important;border-left:1px solid rgba(246,241,231,.3) !important}
+.bar .r2{font-size:11px !important;margin-top:8px !important;display:flex;align-items:center;justify-content:center;gap:7px}
+.bar .r2 em{font-size:12.5px !important}
+.bar .r3{display:inline-flex !important;margin:0 0 0 3px !important;padding-left:9px;
+ border-left:1px solid rgba(246,241,231,.22);gap:6px !important}
+.bar .ends{font-size:8px !important;letter-spacing:.17em !important}
+.tm .u{padding:0 !important;background:none !important;border:0 !important;gap:0 !important}
+.tm b{font-size:12px !important;min-width:14px !important}
+.tm i{display:none !important}
+.tm .c{font-size:10px !important}
 </style>
   </defs>
   <g>
@@ -426,6 +452,8 @@ window.CHIP=function(t){var c=document.querySelector('.chip span');if(c)c.textCo
   else if(m!==10){ bf='Limited Time'; ea=ds; }
   var B=document.querySelector('.bar .bf'), E=document.getElementById('bfDate');
   if(B)B.textContent=bf; if(E)E.textContent=ea;
+  var r2=document.querySelector('.bar .r2'), r3=document.querySelector('.bar .r3');
+  if(r2&&r3) r2.appendChild(r3);
 })();
 </script>
 </body>
