@@ -39,6 +39,15 @@ button{font:inherit;color:inherit;border:0;background:none}
 .ph{position:relative;flex:1 1 auto;min-height:0;overflow:hidden}
 .pim{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .pct{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10px}
+/* ---------- the site's own hero lockup, used in place of the black banner ---------- */
+.oh{flex:none;position:relative;padding:12px 14px 11px;text-align:center;overflow:hidden;background:#5E0F12}
+.oh:before{content:"";position:absolute;inset:0;
+ background:radial-gradient(130% 160% at 50% -30%,rgba(241,233,229,.16),transparent 62%)}
+.oh .lk{position:relative;display:block;width:206px;max-width:74%;height:auto;margin:0 auto}
+.oh .ohs{position:relative;margin-top:8px;font-family:WX;font-size:14px;line-height:1.02;letter-spacing:.03em;
+ text-transform:uppercase;color:var(--cream)}
+.oh .ohd{position:relative;margin-top:6px;font-family:WG;font-size:7px;letter-spacing:.15em;text-transform:uppercase;
+ color:rgba(241,233,229,.62)}
 /* ---------- press strip ---------- */
 .press{flex:none;display:flex;align-items:center;justify-content:space-between;gap:6px;
  padding:7px 13px;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
