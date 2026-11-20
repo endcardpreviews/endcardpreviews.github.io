@@ -91,8 +91,10 @@ html.done #scr{opacity:0}.ob{display:inline-block;margin-top:7px;padding:3px 8px
   [].forEach.call(document.querySelectorAll('[data-dd]'),function(e){ e.textContent=lead+' · '+MON[d.getMonth()]+' '+d.getDate(); });
   /* click-through: the campaign's click URL via MRAID; the fallback is only for a plain browser preview */
   var last=-1e9;
-  window.OPEN=function(){ var t=Date.now(); if(t-last<250) return; last=t; var u=window.clickTag||window.clickTag1||'', m=window.mraid;
-    if(m&&typeof m.open==='function'){ if(u) m.open(u); else m.open(); return; } window.open(u||'https://wonderskin.com/','_blank'); };
+  window.OPEN=function(){ var t=Date.now(); if(t-last<250) return; last=t; var u=window.clickTag||window.clickTag1||'';
+    if(typeof window.mraid!=='undefined' && window.mraid && typeof window.mraid.open==='function'){
+      try{ if(u) window.mraid.open(u); else window.mraid.open(); return; }catch(e){}
+    } window.open(u||'https://wonderskin.com/','_blank'); };
   document.getElementById('cta').addEventListener('click',function(e){ e.stopPropagation(); OPEN(); });
   document.getElementById('hit').addEventListener('click',function(){ OPEN(); });
   var cbs=[]; window.ONDONE=function(f){ cbs.push(f); };

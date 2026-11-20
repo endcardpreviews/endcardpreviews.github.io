@@ -167,8 +167,12 @@ html.done .note{opacity:1}
   /* click-through: the campaign click URL via MRAID; the fallback is only for a plain browser preview */
   var last=-1e9;
   window.OPEN=function(){ var t=Date.now(); if(t-last<250) return; last=t;
-    var u=window.clickTag||window.clickTag1||'', m=window.mraid;
-    if(m&&typeof m.open==='function'){ if(u) m.open(u); else m.open(); return; }
+    var u=window.clickTag||window.clickTag1||'';
+    /* MRAID is guarded by name, not through an alias: the upload asset scan
+       looks for a literal typeof/window.mraid test and cannot see `var m=mraid` */
+    if(typeof window.mraid!=='undefined' && window.mraid && typeof window.mraid.open==='function'){
+      try{ if(u) window.mraid.open(u); else window.mraid.open(); return; }catch(e){}
+    }
     window.open(u||'https://thetallowedtruth.com/pages/black-friday-f-balm','_blank'); };
   document.getElementById('cta').addEventListener('click',function(e){ e.stopPropagation(); OPEN(); });
   document.getElementById('hit').addEventListener('click',function(){ OPEN(); });
