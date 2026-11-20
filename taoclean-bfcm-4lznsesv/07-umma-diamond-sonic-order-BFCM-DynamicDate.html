@@ -15,11 +15,19 @@
     window.addEventListener(ev,stop,true);
     document.addEventListener(ev,stop,true);
   });
+  /* 3. the creative never sees resize directly: every creative here lays itself
+     out from window.innerWidth, so in a window that is not 9:16 it sizes to the
+     window instead of to our panel. We re-drive its layout ourselves, with the
+     viewport briefly reported as the panel, so the art always fills the panel. */
+  window.addEventListener('resize',function(e){
+    e.stopImmediatePropagation();
+    if(window.__BFRESIZE) window.__BFRESIZE();
+  },true);
 })();
 </script>
   <meta charset="UTF-8" /><script>window.__A=["data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzMwLjczIDU2LjAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGRhdGEtbmFtZT0iTGF5ZXIgMSIgaWQ9IkxheWVyXzEiPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICM1NGM4ZTg7CiAgICAgIH0KCiAgICAgIC5jbHMtMiB7CiAgICAgICAgZmlsbDogI2Y4OGQyYTsKICAgICAgfQoKICAgICAgLmNscy0zIHsKICAgICAgICBmaWxsOiAjMWVjYWQzOwogICAgICB9CgogICAgICAuY2xzLTQgewogICAgICAgIGZpbGw6ICNmZmY7CiAgICAgIH0KCiAgICAgIC5jbHMtNSB7CiAgICAgICAgZmlsbDogIzc2Nzc3YTsKICAgICAgfQogICAgPC9zdHlsZT4KICA8L2RlZnM+CiAgPGc+CiAgICA8cGF0aCBkPSJNMjA5LjkzLDE2LjExYy02LjUyLDAtMTAuOTQsNS4zMi0xMC45NCwxMi4xMywwLDIuNjkuNzcsNS43NCwyLjU3LDcuODksMi4wOSwyLjU3LDUuMzgsMy45NSw4LjYxLDMuOTVzNi42My0xLjA3LDguNzItMy45NWMxLjQ5LTIuMDMsNS4wOC4zLDMuMDUsMi42My0yLjkzLDMuNTktNy40MSw1LjMyLTExLjgzLDUuMzJzLTkuMDMtMS44NS0xMi4wMS01LjMyYy0yLjUxLTMuMTEtMy43Ny03LjM1LTMuNTItMTEuNzEuNDgtOC44NCw2Ljc1LTE0Ljg4LDE1Ljg0LTE0Ljg4LDQuMywwLDcuNzcsMS40MywxMSw1LjA4LDEuNzQsMS45Ny0xLjQ5LDQuNDgtMy4xNywyLjUxLTIuMjctMi42My01LjMyLTMuNjUtOC4zMS0zLjY1WiIgY2xhc3M9ImNscy01Ij48L3BhdGg+CiAgICA8cGF0aCBkPSJNMjMwLjc5LDQxLjU3YzAsMS4xNC0uOTYsMi4wMy0yLjE1LDIuMDMtMS4zMSwwLTIuMjEtLjg5LTIuMjEtMi4wM1Y1LjcxYzAtMS4xMy45LTIuMDMsMi4yMS0yLjAzLDEuMTksMCwyLjE1LjksMi4xNSwyLjAzdjM1Ljg2WiIgY2xhc3M9ImNscy01Ij48L3BhdGg+CiAgICA8cGF0aCBkPSJNMjU0LjEzLDEzLjA2YzYuNzUsMS44NSwxMC45NCw3LjM1LDExLjA2LDE1di0uMDZjLjEyLDEuMzItLjQ4LDIuNzUtMi45MywyLjc1aC0yMy42MWMuNzgsNC45LDQuOTYsOC45NywxMC45NCw4Ljk3LDIuNzUsMCw1LjYyLS43Miw3Ljk1LTIuNTEsMi4wOS0xLjkxLDUuMi41MywyLjg3LDIuOTMtMi43NSwyLjU3LTYuNzUsMy42NS0xMC42NCwzLjU5LTQuNjYsMC05LjMyLTEuOC0xMi4xMy01LjMyLTYuNDUtOC40OC0zLjY0LTIyLjIzLDcuNDctMjUuMzQsMi44MS0uODQsNi4wNC0uNzgsOC45NiwwaC4wNlpNMjM4LjQ3LDI3LjFoMjIuNTNjLS40Mi01LjA4LTMuNTMtOC45Ny04LjE5LTEwLjE2aC4wNmMtMS45Ny0uNTQtNC40Mi0uNTQtNi40Ni4wNi00Ljc4LDEuMjYtNy41OSw1LjI2LTcuOTUsMTAuMVoiIGNsYXNzPSJjbHMtNSI+PC9wYXRoPgogICAgPHBhdGggZD0iTTI3Ny4xNCwxMy43MmMxLjk3LS44OSw0LjEyLTEuMiw2LjM5LTEuMTMsMy40MS4wNiw3LjI5LDEuMTMsOS40NSw0LjY2di0yLjI3YzAtMS4yNi43OC0yLjE1LDIuMTUtMi4xNXMyLjIxLjg5LDIuMjEsMi4xNXYyNi41NGMwLDEuMzItLjksMi4xNS0yLjIxLDIuMTVzLTIuMTUtLjgzLTIuMTUtMi4xNXYtMi44N2MtMS43NCwzLjQ3LTYuMTYsNS40NC05LjY5LDUuNDQtMi44NywwLTYuMS0uNzgtOC42MS0yLjU3LTQuNTQtMy4xMS02Ljg3LTguMTktNi43LTE0LjA1LjEyLTYuMDMsMy40Ny0xMS41OSw5LjIxLTEzLjgxbC0uMDYuMDZaTTI5Mi45OCwzMC42M3YtNC43MmMwLTUuOTEtNC4xMy04Ljk2LTkuNTEtOS4yLTQuMjQtLjA2LTguNTUsMi4yMS0xMC4yMiw2LjM5LS41NCwxLjI1LS44NCwyLjg3LS45LDQuNDItLjEyLDMuODksMS4xNCw3LjQ3LDQuMzYsMTAuMTYsMS43OSwxLjM4LDMuOTQsMi4wOSw2LjE2LDIuMjcsNS41LDAsOS44LTMuMzUsMTAuMS05LjMzWiIgY2xhc3M9ImNscy01Ij48L3BhdGg+CiAgICA8cGF0aCBkPSJNMzI2LjM2LDI1Ljc5YzAtNS41LTQuNDItOS4zMi05LjI2LTkuMzItNS44LDAtMTEuMjQsNC43OC0xMS4yNCwxMS4zdjEzLjg2YzAsMS4zMi0uNzgsMi4wOS0yLjE1LDIuMDlzLTIuMjctLjc4LTIuMjctMi4wOVYxNC44NWMwLTIuNzUsNC4zLTIuODEsNC4zLjA2djMuN2MyLjE1LTQuMzYsNi43NS02LjIxLDExLjQyLTYuMjEsNi45MywwLDEzLjU3LDQuNzgsMTMuNTcsMTMuMzl2MTUuODRjMCwxLjMyLS43OCwyLjA5LTIuMTUsMi4wOXMtMi4yMS0uNzgtMi4yMS0yLjA5di0xNS44NFoiIGNsYXNzPSJjbHMtNSI+PC9wYXRoPgogIDwvZz4KICA8Zz4KICAgIDxwYXRoIGQ9Ik00Ny44LDguMkM0Mi41MSwyLjkyLDM1LjQ4LDAsMjgsMFMxMy40OSwyLjkyLDguMiw4LjJDMi45MSwxMy40OSwwLDIwLjUyLDAsMjhzMi45MSwxNC41MSw4LjIsMTkuOGM1LjI5LDUuMjksMTIuMzIsOC4yMSwxOS44LDguMjFzMTQuNTEtMi45MSwxOS44LTguMjFjNS4yOS01LjI5LDguMi0xMi4zMiw4LjItMTkuOHMtMi45MS0xNC41MS04LjItMTkuOFoiIGNsYXNzPSJjbHMtMiI+PC9wYXRoPgogICAgPHBhdGggZD0iTTQwLjQ2LDExLjkySDE1LjYzYy0uNTksMC0xLjA5LjIxLTEuNDQuNi0uMzIuMzUtLjQ5LjgtLjQ5LDEuMywwLC45NC42NywxLjg5LDEuOTMsMS44OWgxMC40djI2LjMyYzAsMS4zMi45OSwyLjAyLDEuOTYsMi4wMnMyLjA2LS43MSwyLjA2LTIuMDJjMC0yLjI2LDAtOC4xOSwwLTEzLjk1LDAtNi4xNiwwLTEyLjM3LDAtMTIuMzdoMTAuNDFjMS4zMiwwLDItLjk1LDItMS44OXMtLjY5LTEuODktMi0xLjg5WiIgY2xhc3M9ImNscy00Ij48L3BhdGg+CiAgPC9nPgogIDxnPgogICAgPHBhdGggZD0iTTExMS41Nyw4LjJjLTUuMjktNS4yOS0xMi4zMi04LjItMTkuOC04LjJzLTE0LjUxLDIuOTItMTkuOCw4LjJjLTUuMjksNS4yOS04LjIsMTIuMzItOC4yLDE5LjhzMi45MSwxNC41MSw4LjIsMTkuOGM1LjI5LDUuMjksMTIuMzIsOC4yMSwxOS44LDguMjFzMTQuNTEtMi45MSwxOS44LTguMjFjNS4yOS01LjI5LDguMi0xMi4zMiw4LjItMTkuOHMtMi45MS0xNC41MS04LjItMTkuOFoiIGNsYXNzPSJjbHMtMSI+PC9wYXRoPgogICAgPHBhdGggZD0iTTkzLjUsMTIuOTZjLS4zNS0uNjYtLjk5LTEuMDQtMS43NC0xLjA0LS42NCwwLTEuNDQuMjgtMS44LDEuMDRsLTE0LjQ4LDI4LjUzYy0uMjUuNTYtLjIyLDEuMTMuMDksMS42Mi4zNy41NywxLjEyLjk2LDEuODcuOTZzMS4zMy0uMzYsMS42My0uOThsMy44MS03LjQ0aDE3LjczbDMuNjcsNy4zYy4zMi42NywxLDEuMDYsMS44MSwxLjA2czEuNTktLjQsMS45My0xYy4yOC0uNS4yNC0xLjEtLjEtMS42N2wtMTQuNDMtMjguMzhaTTk4Ljg5LDMyLjE1aC0xNC4zMmw3LjE5LTE0LjMyLDcuMTQsMTQuMzJaIiBjbGFzcz0iY2xzLTQiPjwvcGF0aD4KICA8L2c+CiAgPHBhdGggZD0iTTE3NS4zMyw4LjJjLTUuMjktNS4yOS0xMi4zMi04LjItMTkuOC04LjJzLTE0LjUxLDIuOTItMTkuOCw4LjJjLTUuMjksNS4yOS04LjIsMTIuMzItOC4yLDE5LjhzMi45MSwxNC41MSw4LjIsMTkuOGM1LjI5LDUuMjksMTIuMzIsOC4yLDE5LjgsOC4yczE0LjUxLTIuOTEsMTkuOC04LjJjNS4yOS01LjI5LDguMi0xMi4zMiw4LjItMTkuOHMtMi45MS0xNC41MS04LjItMTkuOFoiIGNsYXNzPSJjbHMtMyI+PC9wYXRoPgogIDxwYXRoIGQ9Ik0xNzMuMDYsMTAuNDdjLS42MS0uNjEtMS40Ny0uOTItMi41Ny0uOTItMi4yMywwLTUuNCwxLjMyLTguOTgsMy41OC0xLjE0LS40Ni0yLjM0LS44Mi0zLjYxLTEuMDEtMS45NC0uMjItMy41MS0uMjItNS4xNCwwLTcuNiwxLjE5LTEyLjksNy41Mi0xMi45LDE1LjM4LDAsMi4yNC4zNiw0LjMxLDEsNi4yLS41NS44NS0xLjA3LDEuNy0xLjUxLDIuNTEtMi40Niw0LjUxLTIuOTMsNy43My0xLjM0LDkuMzIuNjEuNjEsMS40Ny45MiwyLjU3LjkyLDIuMjIsMCw1LjM2LTEuMjksOC45Mi0zLjU0LDEuODUuNzMsMy45MiwxLjEzLDYuMTUsMS4xMyw4Ljg4LDAsMTUuNTctNy4xMSwxNS41Ny0xNi41NCwwLTEuODYtLjMzLTMuNjQtLjkzLTUuMzEuNTMtLjgyLDEuMDItMS42MywxLjQ1LTIuNDEsMi40Ni00LjUxLDIuOTMtNy43MywxLjM0LTkuMzJaTTE1My4zMSwxNS44MWMuNjYtLjA5LDEuMzQtLjE0LDIuMDEtLjE0czEuMzguMDUsMi4wOS4xNGM0LjgxLjc4LDguNCw0LjMzLDkuNDUsOS0xLjkzLDIuNTUtNC4yMiw1LjE4LTYuNzgsNy43NC0yLjczLDIuNzMtNS41NCw1LjE1LTguMjEsNy4xMy00LjgxLTEuNTMtNy45My02LjA1LTcuOTMtMTIuMDQsMC02LjMsMy42OC0xMC45NSw5LjM4LTExLjg0Wk0xNDAuNTYsNDUuMTVjLS43MywwLTEuMjktLjE4LTEuNjQtLjUzLTEuMDktMS4wOS0uNS0zLjk5LDEuNTctNy43Ny4yOS0uNTMuNjItMS4wOC45Ni0xLjYzLDEuNCwzLjEsMy42OCw1LjU0LDYuNiw3LjA2LTMuMDIsMS44My01LjY1LDIuODgtNy40OSwyLjg4Wk0xNjcuMTgsMjcuNjVjMCw3LjQzLTQuNzUsMTIuNjEtMTEuNTUsMTIuNjEtLjczLDAtMS40My0uMDctMi4xLS4xOCwyLjQ1LTEuODgsNC45OS00LjEsNy40OC02LjYsMi4yNi0yLjI2LDQuMzMtNC41OSw2LjEzLTYuODguMDMuMzUuMDQuNy4wNCwxLjA1Wk0xNjkuNjYsMjAuNzRjLTEuNDMtMi45NS0zLjc4LTUuMzgtNi43My02Ljk1LDMuMDUtMS44NSw1LjcyLTIuOTQsNy41Ni0yLjk0Ljc0LDAsMS4yOS4xOCwxLjY0LjU0LDEuMDksMS4wOC41LDMuOTktMS41Nyw3Ljc3LS4yOC41MS0uNTksMS4wNC0uOTEsMS41N1oiIGNsYXNzPSJjbHMtNCI+PC9wYXRoPgo8L3N2Zz4="];window.__AR=function(){var n=document.querySelectorAll("[data-a]");for(var i=0;i<n.length;i++){var e=n[i],a=e.getAttribute("data-a-attr");e.setAttribute(a,window.__A[+e.getAttribute("data-a")]);e.removeAttribute("data-a");e.removeAttribute("data-a-attr");}};document.addEventListener("DOMContentLoaded",window.__AR);</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TAO Clean — UMMA Diamond Sonic — 60% OFF Pre-Order</title>
+  <title>TAO Clean — UMMA Diamond Sonic — 60% OFF</title>
 
   <style>
     /* ══════════════════════════════════════════════════════════
@@ -663,7 +671,7 @@ html.done .bow{pointer-events:none}
 
           <div class="end-copy">
             <span class="end-1">It&rsquo;s a perfect match!</span>
-            <span class="end-2">PRE-ORDER 60% OFF</span>
+            <span class="end-2">ORDER 60% OFF</span>
             <span class="end-3">
               <i class="spark spark-l"></i>Today Only, <span id="reward-date"></span><i class="spark spark-r"></i>
             </span>
@@ -677,7 +685,7 @@ html.done .bow{pointer-events:none}
           </div>
 
           <div class="cta" id="cta-end">
-            <span class="cta-label">PRE-ORDER NOW</span>
+            <span class="cta-label">ORDER NOW</span>
           </div>
         </div>
       </div>
@@ -903,12 +911,40 @@ function go(){ document.documentElement.insertAdjacentHTML('beforeend',OV);
 
 (function(){
   var R=document.documentElement, UI=document.getElementById('bfui'), S=1;
+  /* Report the panel, not the window, while the creative measures itself, then
+     put the real values straight back: the ad SDK and anything else that reads
+     window.innerWidth outside this moment still sees the true viewport. */
+  var VP={w:Object.getOwnPropertyDescriptor(window,'innerWidth'),
+          h:Object.getOwnPropertyDescriptor(window,'innerHeight')};
+  function lockVP(on){
+    if(!VP.w||!VP.h) return;
+    try{
+      if(on){ Object.defineProperty(window,'innerWidth',{configurable:true,get:function(){return 360}});
+              Object.defineProperty(window,'innerHeight',{configurable:true,get:function(){return 640}}); }
+      else  { Object.defineProperty(window,'innerWidth',VP.w);
+              Object.defineProperty(window,'innerHeight',VP.h); }
+    }catch(e){}
+  }
+  function relayout(){
+    lockVP(true);
+    try{ if(typeof window.resizeHandler==='function') window.resizeHandler();
+         if(typeof window.scaleContainer==='function') window.scaleContainer(); }
+    catch(e){}
+    finally{ lockVP(false); }
+    /* resizing the canvas clears it; redraw at once so a paused timeline
+       (card 04 sits on its last frame) does not leave a blank panel */
+    try{ if(window.stage&&window.stage.update) window.stage.update();
+         if(window.createjs&&createjs.Ticker) createjs.Ticker.dispatchEvent('tick'); }catch(e){}
+  }
   function fit(){
     var W=innerWidth, H=innerHeight; S=Math.min(W/360,H/640);
     var ox=(W-360*S)/2, oy=(H-640*S)/2, k=S*0.84;
     UI.style.transform='translate('+ox+'px,'+oy+'px) scale('+S+')';
     document.body.style.transform='translate('+(ox+(360*S-360*k)/2)+'px,'+(oy+62*S)+'px) scale('+k+')';
+    relayout();
   }
+  window.__BFRESIZE=fit;
+  [120,400,900,1600].forEach(function(ms){ setTimeout(fit,ms); });
   fit(); addEventListener('resize',fit); setTimeout(fit,60); setTimeout(fit,400);
   /* Black Friday countdown: starts at 02:30:00 each time the card opens, like the landing page */
   var left=2*3600+30*60, H=document.getElementById('tH'), M=document.getElementById('tM'), S=document.getElementById('tS');

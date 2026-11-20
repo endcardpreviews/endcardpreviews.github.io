@@ -14,6 +14,14 @@
     window.addEventListener(ev,stop,true);
     document.addEventListener(ev,stop,true);
   });
+  /* 3. the creative never sees resize directly: every creative here lays itself
+     out from window.innerWidth, so in a window that is not 9:16 it sizes to the
+     window instead of to our panel. We re-drive its layout ourselves, with the
+     viewport briefly reported as the panel, so the art always fills the panel. */
+  window.addEventListener('resize',function(e){
+    e.stopImmediatePropagation();
+    if(window.__BFRESIZE) window.__BFRESIZE();
+  },true);
 })();
 </script>
 	<meta charset="utf-8">
@@ -190,12 +198,40 @@ function go(){ document.documentElement.insertAdjacentHTML('beforeend',OV);
 
 (function(){
   var R=document.documentElement, UI=document.getElementById('bfui'), S=1;
+  /* Report the panel, not the window, while the creative measures itself, then
+     put the real values straight back: the ad SDK and anything else that reads
+     window.innerWidth outside this moment still sees the true viewport. */
+  var VP={w:Object.getOwnPropertyDescriptor(window,'innerWidth'),
+          h:Object.getOwnPropertyDescriptor(window,'innerHeight')};
+  function lockVP(on){
+    if(!VP.w||!VP.h) return;
+    try{
+      if(on){ Object.defineProperty(window,'innerWidth',{configurable:true,get:function(){return 360}});
+              Object.defineProperty(window,'innerHeight',{configurable:true,get:function(){return 640}}); }
+      else  { Object.defineProperty(window,'innerWidth',VP.w);
+              Object.defineProperty(window,'innerHeight',VP.h); }
+    }catch(e){}
+  }
+  function relayout(){
+    lockVP(true);
+    try{ if(typeof window.resizeHandler==='function') window.resizeHandler();
+         if(typeof window.scaleContainer==='function') window.scaleContainer(); }
+    catch(e){}
+    finally{ lockVP(false); }
+    /* resizing the canvas clears it; redraw at once so a paused timeline
+       (card 04 sits on its last frame) does not leave a blank panel */
+    try{ if(window.stage&&window.stage.update) window.stage.update();
+         if(window.createjs&&createjs.Ticker) createjs.Ticker.dispatchEvent('tick'); }catch(e){}
+  }
   function fit(){
     var W=innerWidth, H=innerHeight; S=Math.min(W/360,H/640);
     var ox=(W-360*S)/2, oy=(H-640*S)/2, k=S*0.84;
     UI.style.transform='translate('+ox+'px,'+oy+'px) scale('+S+')';
     document.body.style.transform='translate('+(ox+(360*S-360*k)/2)+'px,'+(oy+62*S)+'px) scale('+k+')';
+    relayout();
   }
+  window.__BFRESIZE=fit;
+  [120,400,900,1600].forEach(function(ms){ setTimeout(fit,ms); });
   fit(); addEventListener('resize',fit); setTimeout(fit,60); setTimeout(fit,400);
   /* Black Friday countdown: starts at 02:30:00 each time the card opens, like the landing page */
   var left=2*3600+30*60, H=document.getElementById('tH'), M=document.getElementById('tM'), S=document.getElementById('tS');
