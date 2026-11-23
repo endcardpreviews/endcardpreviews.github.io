@@ -114,13 +114,13 @@ html.done .frame .tag.b,html.done .frame .div,html.done .frame .knob{opacity:0;t
     top.style.width=p+'%'; dv.style.left=p+'%'; kb.style.left=p+'%';
     if(p<lo) lo=p; if(p>hi) hi=p;
     if(hi-lo>=42 || p<=10){
-      set2(); window.ECG.finish();
+      top.style.width='0%'; dv.style.left='0%'; kb.style.left='0%';
+      window.ECG.finish();
     }
   }
-  function set2(){ top.style.width='0%'; dv.style.left='0%'; kb.style.left='0%'; }
   function at(e){
-    var r=fr.getBoundingClientRect(), x=(e.touches&&e.touches[0]?e.touches[0].clientX:e.clientX);
-    if(x===undefined) return; set((x-r.left)/r.width*100);
+    var r=fr.getBoundingClientRect(), t=(e.touches&&e.touches[0])?e.touches[0]:e;
+    if(t.clientX===undefined) return; set((t.clientX-r.left)/r.width*100);
   }
   function down(e){ drag=true; at(e); }
   function move(e){ if(drag){ at(e); if(e.cancelable) e.preventDefault(); } }
