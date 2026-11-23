@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>iRESTORE &mdash; Elite &amp; Skin endcards</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#F7F5F3;color:#1E1E1E;
+ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+ -webkit-font-smoothing:antialiased}
+header{padding:26px 24px 10px;max-width:1360px;margin:0 auto}
+h1{font-size:19px;font-weight:700;letter-spacing:-.01em;margin:0 0 4px}
+h1 span{color:#F23440}
+.meta{font-size:13px;color:#4E5357;line-height:1.5;margin:0}
+.tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:12.5px;color:#4E5357}
+.tools label{font-weight:600;color:#1E1E1E}
+.tools input{font:inherit;padding:6px 9px;border:1px solid #D9D4CF;border-radius:7px;background:#fff}
+.tools button{font:inherit;padding:6px 12px;border:1px solid #D9D4CF;border-radius:7px;
+ background:#fff;cursor:pointer}
+.tools button:hover{border-color:#1E1E1E}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;
+ padding:16px 24px 56px;max-width:1360px;margin:0 auto}
+.item{background:#fff;border:1px solid #EAE6E1;border-radius:14px;padding:14px;scroll-margin-top:16px}
+.hd{display:flex;align-items:baseline;gap:8px;margin-bottom:3px}
+.num{font-size:11px;font-weight:700;color:#F23440;letter-spacing:.08em}
+.ttl{font-size:13.5px;font-weight:700;letter-spacing:-.005em}
+.dsc{font-size:12px;line-height:1.45;color:#4E5357;margin:0 0 11px;min-height:52px}
+.phone{position:relative;width:100%;aspect-ratio:9/16;border-radius:12px;overflow:hidden;
+ background:#fff;border:1px solid #EAE6E1}
+.phone iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+.act{display:flex;gap:8px;margin-top:10px}
+.act a,.act button{flex:1;text-align:center;font:inherit;font-size:11.5px;font-weight:600;
+ padding:7px 6px;border:1px solid #D9D4CF;border-radius:7px;background:#fff;color:#1E1E1E;
+ text-decoration:none;cursor:pointer}
+.act a:hover,.act button:hover{border-color:#1E1E1E}
+#fs{position:fixed;inset:0;z-index:50;background:#0D0D0F;display:none}
+#fs.on{display:block}
+#fsframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;
+ border-radius:50%;border:0;background:rgba(255,255,255,.9);color:#1E1E1E;font-size:20px;
+ line-height:1;cursor:pointer}
+#prev{left:10px}#next{right:10px}
+#close{position:absolute;top:10px;right:10px;z-index:3;border:0;border-radius:999px;
+ background:rgba(255,255,255,.9);color:#1E1E1E;font:inherit;font-size:12px;font-weight:700;
+ padding:8px 13px;cursor:pointer}
+#label{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:3;
+ background:rgba(255,255,255,.9);border-radius:999px;padding:6px 13px;font-size:11.5px;
+ font-weight:600;white-space:nowrap;max-width:86vw;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:720px){
+  header{padding:18px 16px 6px}
+  .grid{padding:12px 16px 40px;gap:18px;grid-template-columns:1fr}
+  .dsc{min-height:0}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>iRESTORE <span>&mdash;</span> Elite &amp; Skin endcards</h1>
+  <p class="meta">9 playable 9:16 concepts &middot; Black Friday / Cyber Monday 2026 &middot; every card renders its campaign line from the viewer's own device date.</p>
+  <div class="tools">
+    <label for="d">Preview a date</label>
+    <input id="d" type="date" value="2026-11-27">
+    <button id="apply" type="button">Apply</button>
+    <button id="clear" type="button">Use today</button>
+    <span id="state"></span>
+  </div>
+</header>
+<div class="grid" id="grid"><div class="item" id="c01"><div class="hd"><span class="num">01</span><span class="ttl">Elite &middot; Laser Tech Reveal</span></div><p class="dsc">Tap the three lights on the Elite; each one unlocks a spec and brings up the lit diode array.</p><div class="phone"><iframe id="f0" title="Concept 01" loading="lazy"></iframe></div><div class="act"><button type="button" data-open="0">Full screen</button><a href="iRestore_BFCM_Elite_LaserTechReveal_DynamicDate_01.html" target="_blank" rel="noopener">Open file</a></div></div><div class="item" id="c02"><div class="hd"><span class="num">02</span><span class="ttl">Elite &middot; Value Stack</span></div><p class="dsc">Tap to build the bundle: the Elite at $1,699, the free REVIVE Max Growth Kit, then Total Value $2,699.</p><div class="phone"><iframe id="f1" title="Concept 02" loading="lazy"></iframe></div><div class="act"><button type="button" data-open="1">Full screen</button><a href="iRestore_BFCM_Elite_ValueStack_DynamicDate_02.html" target="_blank" rel="noopener">Open file</a></div></div><div class="item" id="c03"><div class="hd"><span class="num">03</span><span class="ttl">Elite &middot; Clinical Proof</span></div><p class="dsc">Tap each bar to grow it: 43.2% average hair growth against 5.7% placebo, then the study note.</p><div class="phone"><iframe id="f2" title="Concept 03" loading="lazy"></iframe></div><div class="act"><button type="button" data-open="2">Full screen</button><a href="iRestore_BFCM_Elite_ClinicalProof_DynamicDate_03.html" target="_blank" rel="noopener">Open file</a></div></div><div class="item" id="c04"><div class="hd"><span class="num">04</span><span class="ttl">Laser Face Mask Pro 800 &middot; Tap The Lights</span></div><p class="dsc">Tap the three lights on the mask: 800 lasers and LEDs, 8 wavelengths at once, a 10-minute session.</p><div class="phone"><iframe id="f3" title="Concept 04" loading="lazy"></iframe></div><div class="act"><button type="button" data-open="3">Full screen</button><a href="iRestore_BFCM_FaceMaskPro800_TapTheLights_DynamicDate_04.html" target="_blank" rel="noopener">Open file</a></div></div><div class="item" id="c05"><div class="hd"><span class="num">05</span><span class="ttl">Skin Results &middot; Stat Reveal</span></div><p class="dsc">Tap each result to count it up: 91% improved skin tone, 82% smoother skin, 83% fewer acne breakouts.</p><div class="phone"><iframe id="f4" title="Concept 05" loading="lazy"></iframe></div><div class="act"><button type="button" data-open="4">Full screen</button><a href="iRestore_BFCM_SkinResults_StatReveal_DynamicDate_05.html" target="_blank" rel="noopener">Open file</a></div></div><div class="item" id="c06"><div class="hd"><span class="num">06</span><span class="ttl">Skin Experts &middot; Trusted By Doctors</span></div><p class="dsc">Tap each of the four dermatologists from the brand's own expert panel to bring their portrait up.</p><div class="phone"><iframe id="f5" title="Concept 06" loading="lazy"></iframe></div><div class="act"><button type="button" data-open="5">Full screen</button><a href="iRestore_BFCM_SkinExperts_TrustedByDoctors_DynamicDate_06.html" target="_blank" rel="noopener">Open file</a></div></div><div class="item" id="c07"><div class="hd"><span class="num">07</span><span class="ttl">Skin Quiz &middot; Your Concern</span></div><p class="dsc">Tap any concern and the card goes straight to the skin page.</p><div class="phone"><iframe id="f6" title="Concept 07" loading="lazy"></iframe></div><div class="act"><button type="button" data-open="6">Full screen</button><a href="iRestore_BFCM_SkinQuiz_YourConcern_DynamicDate_07.html" target="_blank" rel="noopener">Open file</a></div></div><div class="item" id="c08"><div class="hd"><span class="num">08</span><span class="ttl">Skin Devices &middot; Choose Your Mask</span></div><p class="dsc">Tap each of the three masks to reveal what it saves: $400, $450 and $350.</p><div class="phone"><iframe id="f7" title="Concept 08" loading="lazy"></iframe></div><div class="act"><button type="button" data-open="7">Full screen</button><a href="iRestore_BFCM_SkinDevices_ChooseYourMask_DynamicDate_08.html" target="_blank" rel="noopener">Open file</a></div></div><div class="item" id="c09"><div class="hd"><span class="num">09</span><span class="ttl">Sitewide Sale &middot; Pop-Up</span></div><p class="dsc">The brand's own sitewide pop-up rebuilt as a playable. Either button opens the landing page.</p><div class="phone"><iframe id="f8" title="Concept 09" loading="lazy"></iframe></div><div class="act"><button type="button" data-open="8">Full screen</button><a href="iRestore_BFCM_SitewideSale_PopUp_DynamicDate_09.html" target="_blank" rel="noopener">Open file</a></div></div></div>
+
+<div id="fs">
+  <iframe id="fsframe" title="Endcard" allow="autoplay"></iframe>
+  <button class="nav" id="prev" type="button" aria-label="Previous">&#8249;</button>
+  <button class="nav" id="next" type="button" aria-label="Next">&#8250;</button>
+  <button id="close" type="button">Close</button>
+  <div id="label"></div>
+</div>
+
+<script>
+var CARDS = [{"n": "01", "f": "iRestore_BFCM_Elite_LaserTechReveal_DynamicDate_01.html", "t": "Elite &middot; Laser Tech Reveal"}, {"n": "02", "f": "iRestore_BFCM_Elite_ValueStack_DynamicDate_02.html", "t": "Elite &middot; Value Stack"}, {"n": "03", "f": "iRestore_BFCM_Elite_ClinicalProof_DynamicDate_03.html", "t": "Elite &middot; Clinical Proof"}, {"n": "04", "f": "iRestore_BFCM_FaceMaskPro800_TapTheLights_DynamicDate_04.html", "t": "Laser Face Mask Pro 800 &middot; Tap The Lights"}, {"n": "05", "f": "iRestore_BFCM_SkinResults_StatReveal_DynamicDate_05.html", "t": "Skin Results &middot; Stat Reveal"}, {"n": "06", "f": "iRestore_BFCM_SkinExperts_TrustedByDoctors_DynamicDate_06.html", "t": "Skin Experts &middot; Trusted By Doctors"}, {"n": "07", "f": "iRestore_BFCM_SkinQuiz_YourConcern_DynamicDate_07.html", "t": "Skin Quiz &middot; Your Concern"}, {"n": "08", "f": "iRestore_BFCM_SkinDevices_ChooseYourMask_DynamicDate_08.html", "t": "Skin Devices &middot; Choose Your Mask"}, {"n": "09", "f": "iRestore_BFCM_SitewideSale_PopUp_DynamicDate_09.html", "t": "Sitewide Sale &middot; Pop-Up"}];
+var qs = '';
+
+function src(i){ return CARDS[i].f + (qs ? '?promo-date=' + qs : ''); }
+
+function paintGrid(){
+  CARDS.forEach(function(c, i){
+    var f = document.getElementById('f' + i);
+    if (f) f.src = src(i);
+  });
+  document.getElementById('state').textContent = qs ? 'Showing ' + qs : '';
+}
+
+/* ---- full screen viewer ---- */
+var fs = document.getElementById('fs'), frame = document.getElementById('fsframe'),
+    label = document.getElementById('label'), cur = -1;
+
+function openAt(i, push){
+  if (i < 0) i = CARDS.length - 1;
+  if (i >= CARDS.length) i = 0;
+  cur = i;
+  frame.src = src(i);
+  label.textContent = CARDS[i].n + ' - ' + CARDS[i].t.replace(/&middot;/g, '/');
+  fs.classList.add('on');
+  document.body.style.overflow = 'hidden';
+  if (push !== false) history.replaceState(null, '', '#' + CARDS[i].n);
+}
+function closeFs(){
+  fs.classList.remove('on'); frame.src = 'about:blank'; cur = -1;
+  document.body.style.overflow = '';
+  history.replaceState(null, '', location.pathname + location.search);
+}
+document.getElementById('close').addEventListener('click', closeFs);
+document.getElementById('prev').addEventListener('click', function(){ openAt(cur - 1); });
+document.getElementById('next').addEventListener('click', function(){ openAt(cur + 1); });
+document.addEventListener('keydown', function(e){
+  if (!fs.classList.contains('on')) return;
+  if (e.key === 'Escape') closeFs();
+  if (e.key === 'ArrowLeft') openAt(cur - 1);
+  if (e.key === 'ArrowRight') openAt(cur + 1);
+});
+document.getElementById('grid').addEventListener('click', function(e){
+  var b = e.target.closest('[data-open]');
+  if (b) openAt(+b.getAttribute('data-open'));
+});
+
+/* ---- promo-date override ---- */
+document.getElementById('apply').addEventListener('click', function(){
+  qs = document.getElementById('d').value || '';
+  paintGrid();
+  if (cur >= 0) frame.src = src(cur);
+});
+document.getElementById('clear').addEventListener('click', function(){
+  qs = ''; paintGrid();
+  if (cur >= 0) frame.src = src(cur);
+});
+
+/* ---- #N deep link ---- */
+function fromHash(){
+  var m = /^#?(\d{1,2})$/.exec(location.hash.replace('#', '#'));
+  if (!m) return;
+  var n = m[1].padStart(2, '0');
+  for (var i = 0; i < CARDS.length; i++) if (CARDS[i].n === n) { openAt(i, false); return; }
+}
+window.addEventListener('hashchange', fromHash);
+paintGrid();
+fromHash();
+</script>
+</body>
+</html>
