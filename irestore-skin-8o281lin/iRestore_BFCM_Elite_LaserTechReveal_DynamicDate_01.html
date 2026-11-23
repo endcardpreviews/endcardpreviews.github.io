@@ -54,8 +54,8 @@ html.done .ia{pointer-events:none!important}
 
 
 #stage{padding:8px 14px 0}
-#hero{position:relative;width:100%;height:196px;margin-top:2px;border-radius:12px;overflow:hidden}
-#hero img{position:absolute;inset:0;margin:auto;max-width:100%;max-height:196px;
+#hero{position:relative;width:100%;height:206px;margin-top:2px;border-radius:12px;overflow:hidden}
+#hero img{position:absolute;inset:0;margin:auto;max-width:100%;max-height:206px;
  width:auto;height:auto;display:block}
 /* the lit-diode render fills the whole frame, so it fully covers the cutout underneath */
 #hero #lasers{opacity:0;transition:opacity .45s ease;inset:0;margin:0;width:100%;height:100%;
@@ -68,13 +68,14 @@ html.done .ia{pointer-events:none!important}
 .dot.on{background:#F23440;border-color:#F23440;transform:scale(.86)}
 .dot.on:after{background:#fff;animation:none}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.55}}
-#d1{left:58px;top:126px}#d2{left:50%;margin-left:-15px;top:58px}#d3{right:58px;top:126px}
+#d1{left:58px;top:132px}#d2{left:50%;margin-left:-15px;top:62px}#d3{right:58px;top:132px}
 #specs{width:100%;margin-top:10px;display:flex;flex-direction:column;gap:6px}
 .spec{display:flex;align-items:center;gap:9px;background:#F7F5F3;border-radius:9px;
- padding:9px 11px;opacity:.5;transition:opacity .3s ease,background .3s ease}
-.spec.on{opacity:1;background:var(--tint)}
-.spec .n{font-size:19px;font-weight:700;letter-spacing:-.02em;color:#F23440;line-height:1;
- min-width:62px;text-align:center}
+ padding:11px;transition:background .3s ease}
+.spec.on{background:var(--tint)}
+.spec .n{font-size:20px;font-weight:700;letter-spacing:-.02em;color:#C8C3BE;line-height:1;
+ min-width:62px;text-align:center;transition:color .3s ease}
+.spec.on .n{color:#F23440}
 .spec .t{font-size:11px;font-weight:500;line-height:1.25;letter-spacing:.02em;color:#1E1E1E}
 
 </style>

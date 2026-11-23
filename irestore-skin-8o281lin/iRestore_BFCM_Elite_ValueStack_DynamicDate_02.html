@@ -54,16 +54,17 @@ html.done .ia{pointer-events:none!important}
 
 
 #stage{padding:8px 14px 0}
-#pair{position:relative;width:100%;height:150px}
-#pair img{position:absolute;max-height:142px;width:auto;height:auto;display:block}
-#pe{left:0;bottom:0;max-width:56%}
-#pg{right:0;bottom:6px;max-width:41%;max-height:126px;opacity:0;transform:translateY(8px);
+#pair{position:relative;width:100%;height:170px}
+#pair img{position:absolute;max-height:162px;width:auto;height:auto;display:block}
+#pe{left:22%;bottom:0;max-width:56%;transition:left .42s cubic-bezier(.2,.8,.25,1)}
+#pair.g #pe{left:0}
+#pg{right:0;bottom:6px;max-width:41%;max-height:144px;opacity:0;transform:translateY(8px);
  transition:opacity .4s ease,transform .4s ease;border-radius:10px;
  box-shadow:0 0 0 1px #EAE6E1 inset}
 #pg.on{opacity:1;transform:none}
 #rows{width:100%;margin-top:8px;display:flex;flex-direction:column;gap:5px}
 .row{display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer;
- background:#F7F5F3;border:1px solid #EAE6E1;border-radius:9px;padding:9px 11px;
+ background:#F7F5F3;border:1px solid #EAE6E1;border-radius:9px;padding:10px 11px;
  transition:background .25s ease,border-color .25s ease}
 .row .l{font-size:11.5px;font-weight:500;line-height:1.2;letter-spacing:.01em;text-align:left}
 .row .v{font-size:13px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;color:#9C9792}
@@ -207,7 +208,10 @@ html.done .ia{pointer-events:none!important}
 document.querySelectorAll('[data-rv]').forEach(function(r){
   var id = r.getAttribute('data-rv');
   r.addEventListener('click', function(){
-    if (id === 'x2') document.getElementById('pg').classList.add('on');
+    if (id === 'x2') {
+      document.getElementById('pg').classList.add('on');
+      document.getElementById('pair').classList.add('g');
+    }
   });
 });
 ECG.reveal({});
