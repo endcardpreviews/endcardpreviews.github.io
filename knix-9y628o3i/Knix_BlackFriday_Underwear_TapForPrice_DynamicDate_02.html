@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="robots" content="noindex">
 <title>Knix &middot; All Underwear</title>
@@ -181,13 +180,17 @@ html.done .knx-chip{opacity:0;animation:none}
       p.style.setProperty('--dx',Math.cos(t)*v+'px'); p.style.setProperty('--dy',Math.sin(t)*v+'px');
       p.style.setProperty('--r',(Math.random()*360-180)+'deg'); p.style.background=C[i%C.length];
       cv.appendChild(p); (function(p){setTimeout(function(){p.remove()},1150)})(p); } };
+  /* Gestures are tracked on the window, not on the element. Pointer capture is still requested,
+     but when a browser refuses it the element alone would stop receiving moves the instant the
+     finger left it -- which on a reveal panel is immediately. Listening on the window keeps the
+     whole gesture alive either way, and there is no double-fire because only one listener runs. */
   window.DRAG=function(el,h){ var on=false,x0=0,y0=0,dx=0,dy=0;
     el.addEventListener('pointerdown',function(e){ if(R.classList.contains('done')) return; on=true; x0=e.clientX; y0=e.clientY;
       dx=dy=0; try{el.setPointerCapture(e.pointerId)}catch(_){ } if(h.start) h.start(e); e.preventDefault(); });
-    el.addEventListener('pointermove',function(e){ if(!on) return; var s=window.__S||1;
-      dx=(e.clientX-x0)/s; dy=(e.clientY-y0)/s; if(h.move) h.move(dx,dy,e); });
+    window.addEventListener('pointermove',function(e){ if(!on) return; var s=window.__S||1;
+      dx=(e.clientX-x0)/s; dy=(e.clientY-y0)/s; if(h.move) h.move(dx,dy,e); },{passive:false});
     function up(e){ if(!on) return; on=false; if(h.end) h.end(dx,dy,e); }
-    el.addEventListener('pointerup',up); el.addEventListener('pointercancel',up);
+    window.addEventListener('pointerup',up); window.addEventListener('pointercancel',up);
     el.addEventListener('click',function(e){ e.stopPropagation(); }); };
   window.SCRATCH=function(c,o){ var x=c.getContext('2d'), GW=o.gw||16, GH=o.gh||8, cells={}, got=0, lp=null, started=false;
     function size(){ var w=c.offsetWidth,h=c.offsetHeight; if(!w||!h) return false;
@@ -195,12 +198,24 @@ html.done .knx-chip{opacity:0;animation:none}
     function paint(){ if(started||!size()) return; x.globalCompositeOperation='source-over';
       x.clearRect(0,0,c.width,c.height); o.paint(x,c.width,c.height); }
     function rub(e){ started=true; var q=LOCAL(c,e), s=c.width/q.w, X=q.x*s, Y=q.y*s;
-      x.globalCompositeOperation='destination-out'; x.lineCap='round'; x.lineJoin='round'; x.lineWidth=(o.brush||46);
+      var BR=(o.brush||54);
+      x.globalCompositeOperation='destination-out'; x.lineCap='round'; x.lineJoin='round'; x.lineWidth=BR;
       x.beginPath(); if(lp){ x.moveTo(lp[0],lp[1]); x.lineTo(X,Y); } else { x.moveTo(X,Y); x.lineTo(X+.1,Y); }
       x.stroke(); lp=[X,Y];
-      for(var a=-1;a<=1;a++) for(var b=-1;b<=1;b++){ var gx=Math.floor(X/c.width*GW)+a, gy=Math.floor(Y/c.height*GH)+b,
-          k=gy*GW+gx; if(gx>=0&&gy>=0&&gx<GW&&gy<GH&&!cells[k]){ cells[k]=1; got++; } }
-      if(got/(GW*GH)>(o.done||.5)) FINISH(); }
+      /* Credit the cells the stroke really cleared. A finger rubbing a panel strays past its
+         edges constantly, and the old test (gx/gy must already be in range) threw those samples
+         away -- the foil came off while the counter stayed near zero, so the card never finished
+         and the reveal never landed. Clamp instead, but only while the brush can still reach the
+         canvas, so a pointer that has wandered right away credits nothing. */
+      var r=BR/2;
+      if(X>-r && X<c.width+r && Y>-r && Y<c.height+r){
+        var gx0=Math.floor(Math.min(c.width-1,Math.max(0,X))/c.width*GW),
+            gy0=Math.floor(Math.min(c.height-1,Math.max(0,Y))/c.height*GH);
+        for(var a=-1;a<=1;a++) for(var b=-1;b<=1;b++){
+          var gx=Math.min(GW-1,Math.max(0,gx0+a)), gy=Math.min(GH-1,Math.max(0,gy0+b)),
+              k=gy*GW+gx; if(!cells[k]){ cells[k]=1; got++; } }
+      }
+      if(got/(GW*GH)>(o.done||.4)) FINISH(); }
     DRAG(c,{ start:function(e){ lp=null; rub(e); }, move:function(dx,dy,e){ rub(e); }, end:function(){ lp=null; } });
     return {paint:paint}; };
 })();
