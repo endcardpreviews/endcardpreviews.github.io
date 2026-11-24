@@ -60,15 +60,60 @@ body{font-family:'wsPoppins',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoo
   transition:transform .42s ease,opacity .12s ease;border:1px solid #E4E5E9;background:#fff}
 .ws-flip .ws-front{transform:rotateY(0deg);display:flex;flex-direction:column}
 .ws-flip .ws-back{transform:rotateY(180deg);background:#5F39A4;border-color:#5F39A4;
-  color:#fff;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
-  padding:8px 9px;text-align:left}
+  color:#fff;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;
+  padding:7px;text-align:left}
 .ws-flip.ws-open .ws-front{transform:rotateY(-180deg);opacity:0;
   transition:transform .42s ease,opacity .12s .24s}
 .ws-flip.ws-open .ws-back{transform:rotateY(0deg)}
-.ws-bt{display:block;font-weight:700;font-size:11px;line-height:13px;letter-spacing:.02em;
-  text-transform:uppercase;color:#fff}
-.ws-bb{display:block;margin-top:3px;font-weight:400;font-size:10px;line-height:12.5px;
-  color:rgba(255,255,255,.93)}
+
+/* THE BACK OF A TILE IS A DEAL CARD, NOT A PARAGRAPH (Emily, 2026-11-24).
+   The product it sells stays on the face, the price lockup is the hero, and the
+   one line of words is a phrase, not a sentence. */
+.ws-dealTop{position:relative;flex:1 1 auto;min-height:0;border-radius:7px;overflow:hidden;
+  background-color:#fff;background-repeat:no-repeat;background-position:50% 50%;display:block}
+.ws-dealTop.ws-fitC{background-size:contain}
+.ws-dealTop.ws-fitX{background-size:cover}
+.ws-dealChip{position:absolute;left:5px;top:5px;z-index:2;font-weight:700;font-size:9px;
+  line-height:11px;letter-spacing:.08em;text-transform:uppercase;color:#5F39A4;
+  background:#fff;padding:2px 5px;border-radius:2px;box-shadow:0 1px 4px rgba(11,11,12,.2)}
+.ws-dealPrice{display:block;flex:0 0 auto;margin-top:6px;font-weight:700;font-size:19px;
+  line-height:21px;letter-spacing:-.015em;color:#fff}
+.ws-dealPrice s{font-weight:400;font-size:11px;letter-spacing:0;margin-left:5px;
+  color:rgba(255,255,255,.66)}
+.ws-dealLine{display:block;flex:0 0 auto;margin-top:2px;font-weight:600;font-size:9.5px;
+  line-height:12px;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+.ws-dealGo{display:flex;flex:0 0 auto;align-items:center;justify-content:center;gap:4px;
+  margin-top:6px;height:19px;border-radius:3px;background:#fff;color:#5F39A4;
+  font-weight:700;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase}
+
+/* NO-FLIP TILES (Emily, 2026-11-24: "some designs don't need to be flipped, and it just
+   shows the products"). The packshot never turns over or gets covered: the tap rings the
+   tile, lifts the product and drops a purple saving bar in under the price. */
+html.ws-reveal .ws-flip{perspective:none;-webkit-perspective:none}
+html.ws-reveal .ws-flip .ws-back{display:none}
+html.ws-reveal .ws-flip .ws-front{transition:box-shadow .18s ease,border-color .18s ease}
+html.ws-reveal .ws-flip.ws-open .ws-front{transform:rotateY(0deg);opacity:1;
+  border-color:#5F39A4;box-shadow:0 0 0 2px #5F39A4 inset}
+html.ws-reveal .ws-shot img,html.ws-reveal .ws-tileFace img{transition:transform .26s ease}
+html.ws-reveal .ws-flip.ws-open .ws-shot img,
+html.ws-reveal .ws-flip.ws-open .ws-tileFace img{transform:scale(1.06)}
+.ws-revBar{display:block;overflow:hidden;max-height:0;opacity:0;
+  transition:max-height .26s ease,opacity .2s ease,margin-top .26s ease}
+.ws-flip.ws-open .ws-revBar{max-height:22px;opacity:1;margin-top:4px}
+.ws-revBar b{display:block;background:#5F39A4;color:#fff;font-weight:700;font-size:9px;
+  line-height:16px;letter-spacing:.04em;text-transform:uppercase;text-align:center;
+  border-radius:3px;padding:0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* A board tile is too short to stack a bar under its name plate without squeezing the
+   packshot below the 120px floor (card 08's tiles are 164x138), so the name plate itself
+   becomes the price plate: same strip, same height, nothing newly over the product. */
+.ws-tileFace .ws-lblAlt{position:absolute;left:0;right:0;bottom:0;z-index:3;
+  background:#5F39A4;color:#fff;font-weight:700;font-size:9px;line-height:12px;
+  letter-spacing:.04em;text-transform:uppercase;padding:5px 4px;text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;
+  transition:opacity .22s ease}
+.ws-tileFace .ws-lbl{transition:opacity .22s ease}
+.ws-flip.ws-open .ws-tileFace .ws-lbl{opacity:0}
+.ws-flip.ws-open .ws-tileFace .ws-lblAlt{opacity:1}
 .ws-board{position:absolute;inset:0;display:grid;gap:8px}
 .ws-tileBtn{position:relative;border:1px solid #E4E5E9;border-radius:10px;overflow:hidden;
   background:#fff;padding:0;cursor:pointer;transition:border-color .16s ease,box-shadow .16s ease}
@@ -93,6 +138,22 @@ body{font-family:'wsPoppins',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoo
 .ws-rowTxt .ws-rgo{display:inline-block;margin-top:5px;font-weight:700;font-size:9.5px;line-height:11px;
   letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#5F39A4;
   padding:3px 7px;border-radius:3px}
+/* the row's back keeps the packshot exactly where it was, so turning the tile over
+   changes the panel beside the product rather than hiding the product */
+.ws-flip .ws-back.ws-rowBack{flex-direction:row;align-items:center;gap:10px;padding:0 12px 0 0}
+.ws-rowBack .ws-rimg{flex:0 0 auto;width:120px;height:100%;display:block;
+  background-color:#fff;background-size:contain;background-repeat:no-repeat;
+  background-position:50% 50%;border-right:1px solid #5F39A4}
+.ws-rowBack .ws-rbTxt{flex:1 1 auto;min-width:0;text-align:left}
+.ws-rowBack .ws-rbk{display:block;font-weight:700;font-size:9px;line-height:11px;letter-spacing:.11em;
+  text-transform:uppercase;color:rgba(255,255,255,.8)}
+.ws-rowBack .ws-rbp{display:block;margin-top:1px;font-weight:700;font-size:21px;line-height:23px;
+  letter-spacing:-.015em;color:#fff}
+.ws-rowBack .ws-rbl{display:block;margin-top:2px;font-weight:600;font-size:9.5px;line-height:12px;
+  letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.86)}
+.ws-rowBack .ws-rbgo{display:inline-block;margin-top:6px;font-weight:700;font-size:9.5px;
+  line-height:11px;letter-spacing:.11em;text-transform:uppercase;color:#5F39A4;background:#fff;
+  padding:3px 8px;border-radius:3px}
 .ws-tileFace img{width:100%;height:100%;object-fit:cover;display:block}
 .ws-tileFace .ws-lbl{position:absolute;left:0;right:0;bottom:0;background:rgba(255,255,255,.93);
   font-weight:700;font-size:10px;line-height:12px;letter-spacing:.09em;text-transform:uppercase;
@@ -356,11 +417,13 @@ html.done .ws-cell,html.done .ws-tileBtn,html.done .ws-dot,html.done .ws-disc{po
   function pick(ev){
     if (ev){ ev.preventDefault(); ev.stopPropagation(); }
     var el = this, idx = Number(el.getAttribute('data-i'));
+    /* On a flip card only one tile is ever face-down, so a product stays on screen
+       throughout. On a no-flip card nothing is hidden in the first place, so every
+       tile keeps what it revealed and the finished state shows all of them. */
+    var keepAll = document.documentElement.classList.contains('ws-reveal');
     for (var j = 0; j < nodes.length; j++){
       nodes[j].classList.remove('ws-on');
-      /* only one tile is ever face-down, so the product stays on screen throughout
-         and the finished state is never a wall of text */
-      if (nodes[j] !== this){ nodes[j].classList.remove('ws-open'); }
+      if (!keepAll && nodes[j] !== this){ nodes[j].classList.remove('ws-open'); }
       if (seen[j]) { nodes[j].classList.add('ws-seen'); }
     }
     el.classList.remove('ws-seen');
