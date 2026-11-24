@@ -28,10 +28,16 @@ html.done .play{pointer-events:none!important}
    The thin supporting sentence becomes a label plus boxed digits. It stays ONE
    supporting element under the offer headline, so the three-things rule still holds.
    Class names are prefixed cd* because .pl is already the AS SEEN ON label. */
-#promo{margin-top:7px;display:flex;flex-direction:column;align-items:center;gap:2px}
-#promo .cdlab{font-weight:700;font-size:15px;letter-spacing:.1em;line-height:1;text-transform:none}
+#promo{margin-top:7px;display:flex;flex-direction:column;align-items:center;gap:3px;width:100%;max-width:252px;margin-left:auto;margin-right:auto}
+/* Emily, 2026-11-23: "the Black Friday needs to be very obvious. It's written in
+   black, and I can barely tell that it's Black Friday." So it is no longer a grey
+   line on a cream stage — it is white type on a solid black band. */
+#promo .cdlab{display:block;width:100%;font-weight:700;font-size:21px;letter-spacing:.13em;
+ line-height:1;text-transform:uppercase;color:#fff;background:#141312;
+ padding:7px 10px 8px;border-radius:3px;text-align:center}
 #promo .cdsub{font-weight:500;font-size:12.5px;letter-spacing:.01em;line-height:1.25}
-#bar.on-red #promo .cdsub,#bar.on-red #promo .cdstamp{opacity:.88}
+#bar.on-red #promo .cdsub,#bar.on-red #promo .cdstamp{opacity:.9}
+#bar.on-red #promo .cdlab{background:#111010}
 /* ---- stage ---- */
 #stage{flex:1 1 auto;width:100%;position:relative;display:flex;flex-direction:column;align-items:center;min-height:0}
 h1{margin:0;font-weight:700;letter-spacing:-.022em;line-height:1.08;text-align:center}
@@ -68,15 +74,15 @@ h1{font-size:20px;padding:0 26px;color:#fff}
 .sp.on{background:#F23440;border-color:#F23440}
 .sp.on:after{display:none}
 @keyframes pls{0%{transform:scale(.72);opacity:.95}100%{transform:scale(1.5);opacity:0}}
-.pan{width:318px;min-height:116px;margin:12px auto 0;border-radius:8px;background:rgba(255,255,255,.075);
+.pan{width:318px;min-height:92px;margin:4px auto 0;border-radius:8px;background:rgba(255,255,255,.075);
   border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;gap:12px;padding:12px;position:relative}
 .pv{display:flex;align-items:center;gap:12px;width:100%}
 .pv[hidden]{display:none}
-.pan img{width:84px;height:84px;object-fit:cover;border-radius:6px;display:block;flex:0 0 auto}
+.pan img{width:76px;height:76px;object-fit:cover;border-radius:6px;display:block;flex:0 0 auto}
 .pt{flex:1 1 auto;min-width:0}
 .pt b{display:block;font-size:16px;font-weight:700;letter-spacing:-.015em;color:#fff;line-height:1.14}
 .pt span{display:block;font-size:10.5px;line-height:1.4;color:rgba(255,255,255,.74);margin-top:6px}
-.cnt{margin-top:2px;font-size:10px;font-weight:700;letter-spacing:.15em;color:rgba(255,255,255,.5);text-align:center}
+.cnt{margin-top:1px;font-size:10px;font-weight:700;letter-spacing:.15em;color:rgba(255,255,255,.5);text-align:center}
 #hint{margin-top:10px;margin-bottom:10px}
 </style>
 </head>
