@@ -79,10 +79,16 @@ body{font-family:'dsqAdrianna',"Helvetica Neue",Arial,sans-serif;-webkit-font-sm
 .dsq-ptag{font-weight:700;font-size:9px;line-height:12px;letter-spacing:.07em;text-transform:uppercase;
   color:#C05418}
 .dsq-panel{position:absolute;left:12px;right:12px;top:508px;height:80px;z-index:4;border-radius:9px;
-  background:rgba(14,14,16,.93);border:1px solid rgba(255,255,255,.16);padding:7px 11px;overflow:hidden}
-.dsq-ptitle{font-weight:700;font-size:16px;line-height:18px;letter-spacing:.01em;text-transform:uppercase}
-.dsq-pbody{margin-top:3px;font-weight:400;font-size:11px;line-height:14px;color:rgba(255,255,255,.88)}
-.dsq-pbody b{font-weight:700;color:#fff}
+  background:#FBF8F2;border:1px solid rgba(0,0,0,.12);border-left:5px solid #B5292A;
+  padding:7px 11px;overflow:hidden;color:#0A0A0B;box-shadow:0 6px 18px rgba(0,0,0,.42);
+  transition:border-left-width .17s ease}
+html.dsq-sw .dsq-panel{border-left-width:12px}
+.dsq-pwrap{transition:opacity .13s ease,transform .13s ease}
+html.dsq-sw .dsq-pwrap{opacity:0;transform:translateY(7px)}
+.dsq-ptitle{font-weight:700;font-size:16px;line-height:18px;letter-spacing:.01em;text-transform:uppercase;
+  color:#0A0A0B}
+.dsq-pbody{margin-top:3px;font-weight:400;font-size:11px;line-height:14px;color:rgba(10,10,11,.8)}
+.dsq-pbody b{font-weight:700;color:#0A0A0B}
 .dsq-cta{position:absolute;left:12px;right:12px;top:596px;height:38px;z-index:7;border:0;border-radius:6px;
   font-family:'dsqWorker',"Arial Black",Impact,sans-serif;font-weight:800;font-size:15px;letter-spacing:.05em;
   text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;
@@ -112,8 +118,10 @@ html.done .dsq-pin{animation:none}
   </div>
   <div class="dsq-pricebar"><span class="dsq-pname">Bar Soap 6-Pack from</span><span class="dsq-pnow">$36.00</span><span class="dsq-pwas">$42.00</span></div>
   <div class="dsq-panel" id="dsq-panel">
-    <div class="dsq-ptitle" id="dsq-ptitle"></div>
-    <div class="dsq-pbody" id="dsq-pbody"></div>
+    <div class="dsq-pwrap">
+      <div class="dsq-ptitle" id="dsq-ptitle"></div>
+      <div class="dsq-pbody" id="dsq-pbody"></div>
+    </div>
   </div>
   <div class="dsq-cta" id="cta" role="button" tabindex="0">Shop the Sale</div>
   <div class="dsq-hit" id="hit"></div>
@@ -178,7 +186,22 @@ html.done .dsq-pin{animation:none}
   /* ---- panel ---- */
   var title = document.getElementById('dsq-ptitle');
   var bodyEl = document.getElementById('dsq-pbody');
-  function show(o){ title.textContent = o.t; bodyEl.textContent = o.b; }
+  /* The words used to swap in place with no transition, which read as nothing
+     happening. Now the panel drops its text, widens its accent edge and brings
+     the new text back up. */
+  var swapT = null;
+  function write(o){ title.textContent = o.t; bodyEl.textContent = o.b; }
+  function show(o, animate){
+    var root = document.documentElement;
+    if (!animate){ write(o); return; }
+    if (swapT){ window.clearTimeout(swapT); }
+    root.classList.add('dsq-sw');
+    swapT = window.setTimeout(function(){
+      write(o);
+      root.classList.remove('dsq-sw');
+      swapT = null;
+    }, 140);
+  }
   show(DATA.intro);
 
   /* ---- interaction ---- */
@@ -204,12 +227,12 @@ html.done .dsq-pin{animation:none}
       if (s === idx){ swaps[s].classList.add('dsq-vis'); }
       else { swaps[s].classList.remove('dsq-vis'); }
     }
-    show(DATA.items[idx]);
+    show(DATA.items[idx], true);
     if (count >= total && !finished){
       finished = true;
       document.getElementById('hint').textContent = 'Tap to shop';
       window.setTimeout(function(){
-        show(DATA.done);
+        show(DATA.done, true);
         document.documentElement.classList.add('done');
       }, 420);
     }
