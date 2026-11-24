@@ -14,14 +14,14 @@ body{font-family:'nbMont',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothi
 .nb-card{position:relative;width:360px;height:640px;overflow:hidden;background:#FFFFFF}
 
 /* the site's own Black Friday bar, with its countdown */
-.nb-bar{position:absolute;left:0;right:0;top:0;height:46px;z-index:7;background:#222222;
+.nb-bar{position:absolute;left:0;right:0;top:0;height:46px;z-index:7;background:#0F2724;
   display:flex;align-items:center;justify-content:center;gap:9px;padding:0 8px}
 .nb-bar .nb-bt{display:block;font-weight:400;font-size:11px;line-height:14px;letter-spacing:.1em;
   color:#fff;white-space:nowrap;text-align:right}
 .nb-bar .nb-bt b{display:block;font-weight:500;font-size:12px;line-height:16px;letter-spacing:.1em}
 .nb-cd{display:flex;align-items:flex-start;gap:3px;flex:0 0 auto}
 .nb-cd .nb-u{display:flex;flex-direction:column;align-items:center;gap:1px}
-.nb-cd .nb-n{display:block;min-width:22px;padding:1px 3px;border-radius:3px;background:#fff;color:#222222;
+.nb-cd .nb-n{display:block;min-width:22px;padding:1px 3px;border-radius:3px;background:#fff;color:#0F2724;
   font-weight:700;font-size:13px;line-height:16px;text-align:center;font-variant-numeric:tabular-nums}
 .nb-cd .nb-l{display:block;font-weight:600;font-size:7.5px;line-height:9px;letter-spacing:.08em;
   text-transform:uppercase;color:rgba(255,255,255,.82)}
@@ -63,7 +63,8 @@ body{font-family:'nbMont',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothi
   display:flex;flex-direction:column;align-items:stretch;padding:7px}
 .nb-tile.nb-open .nb-front{transform:rotateY(-180deg);opacity:0;transition:transform .42s ease,opacity .12s .24s}
 .nb-tile.nb-open .nb-back{transform:rotateY(0deg)}
-.nb-shot{position:relative;flex:1 1 auto;min-height:0;background:#fff}
+.nb-shot{position:relative;flex:1 1 auto;min-height:0;background:#fff;
+  transition:background-color .22s ease}
 .nb-shot img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .26s ease}
 .nb-save{position:absolute;left:6px;top:6px;z-index:2;font-weight:700;font-size:9px;line-height:11px;
   letter-spacing:.05em;text-transform:uppercase;color:#fff;background:#054B48;padding:3px 5px;border-radius:2px}
@@ -163,6 +164,67 @@ html.nb-struck .nb-pricebar .nb-pp i{opacity:1}
   border-radius:3px}
 .nb-stamp.nb-wide b{max-width:none;white-space:nowrap}
 .nb-stamp b i{font-style:normal;color:#9FC4BE}
+
+/* ---------- colourways: 12 of the brand's own, repainting in place ---------- */
+.nb-cwrap{position:absolute;left:0;right:0;top:0;height:196px}
+.nb-cw{position:absolute;left:50%;top:0;transform:translateX(-50%);height:100%;width:auto;
+  object-fit:contain;display:block;opacity:0;transition:opacity .22s ease}
+.nb-cw.nb-vis{opacity:1}
+.nb-cwname{position:absolute;left:0;right:0;top:200px;height:17px;text-align:center}
+.nb-cwname span{position:absolute;left:0;right:0;top:0;font-weight:500;font-size:12px;line-height:17px;
+  letter-spacing:.09em;color:#282828;opacity:0;transition:opacity .2s ease}
+.nb-cwname span.nb-vis{opacity:1}
+/* twelve swatches on ONE row: wrapping put the second row under the price bar, where its
+   taps never landed and the card could not finish */
+/* twelve swatches on ONE row: wrapping put the second row under the price bar, where its
+   taps never landed and the card could not finish. 324px of room, so 23px targets with a
+   5px gutter for the selected ring to grow into without clipping the end swatches. */
+.nb-swatches{position:absolute;left:6px;right:6px;top:222px;display:flex;flex-wrap:nowrap;
+  justify-content:center;gap:3px;padding:0 5px}
+.nb-sw{flex:0 0 auto;width:23px;height:26px;padding:0;border:0;background:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center}
+.nb-sw i{display:block;width:17px;height:17px;border-radius:50%;background:var(--sw);
+  box-shadow:0 0 0 1px rgba(11,11,12,.18) inset,0 1px 3px rgba(0,0,0,.14);
+  transition:transform .18s ease,box-shadow .18s ease}
+.nb-sw.nb-open i{transform:scale(1.12);
+  box-shadow:0 0 0 1px rgba(11,11,12,.18) inset,0 0 0 2px #fff,0 0 0 3px #054B48}
+/* a colour already seen gets an INSET tick ring, so its footprint never grows */
+.nb-sw.nb-seen i{box-shadow:0 0 0 1.5px #fff inset,0 0 0 3px rgba(5,75,72,.5) inset,
+  0 1px 3px rgba(0,0,0,.14)}
+
+/* ---------- pick a card (the brand's own getaway page) ---------- */
+.nb-pick{position:absolute;inset:0;border-radius:10px;overflow:hidden;background:#F6F3EC;
+  display:flex;flex-direction:column;align-items:center;padding:12px 10px 10px}
+.nb-pickh{font-weight:700;font-size:21px;line-height:25px;letter-spacing:.055em;text-transform:uppercase;
+  color:#054B48;text-align:center}
+.nb-picks{margin-top:3px;font-weight:500;font-size:11.5px;line-height:15px;letter-spacing:normal;
+  color:rgba(40,40,40,.74);text-align:center;transition:color .25s ease}
+html.nb-won .nb-picks{color:#054B48;font-weight:600}
+.nb-pgrid{margin-top:9px;display:grid;grid-template-columns:repeat(3,94px);grid-template-rows:repeat(3,74px);
+  gap:7px;flex:0 0 auto}
+.nb-pc{position:relative;border:0;padding:0;background:none;cursor:pointer;
+  perspective:560px;-webkit-perspective:560px}
+.nb-pcf,.nb-pcb{position:absolute;inset:0;border-radius:7px;overflow:hidden;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .40s ease,opacity .1s ease}
+/* the face-down card: the brand's pale mint plate with its chevron ghosted into it */
+.nb-pcf{transform:rotateY(0deg);background:#CBDAD4;border:1.5px solid #B3C8C1;
+  display:flex;align-items:center;justify-content:center}
+.nb-pcf img{width:46px;height:auto;display:block;opacity:.5}
+.nb-pcb{transform:rotateY(180deg);background:#fff;border:1.5px solid #E3E1DC;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:3px 4px 4px}
+.nb-pc.nb-open .nb-pcf{transform:rotateY(-180deg);opacity:0;transition:transform .40s ease,opacity .1s .26s}
+.nb-pc.nb-open .nb-pcb{transform:rotateY(0deg)}
+.nb-pc .nb-pcimg{flex:1 1 auto;min-height:0;width:100%;display:block;object-fit:contain}
+.nb-pc .nb-pcn{flex:0 0 auto;display:block;font-weight:500;font-size:8.5px;line-height:10px;
+  letter-spacing:.02em;color:#282828;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.nb-pc .nb-pcv{position:absolute;left:4px;top:4px;z-index:2;font-weight:600;font-size:8.5px;line-height:10px;
+  color:#fff;background:#054B48;border-radius:9px;padding:2px 6px;white-space:nowrap}
+.nb-pc.nb-win .nb-pcb{border-color:#054B48;box-shadow:0 0 0 1.5px #054B48}
+.nb-pcmiss{background:#F7F7F5}
+.nb-pcmiss .nb-pcimg{opacity:.22;padding:10px 14px}
+.nb-pcmiss .nb-pcn{color:rgba(40,40,40,.55)}
+.nb-ptot{margin-top:auto;flex:0 0 auto;font-weight:600;font-size:10px;line-height:13px;letter-spacing:.06em;
+  text-transform:uppercase;color:rgba(40,40,40,.6);padding-bottom:1px}
 
 /* ---------- piece chips (the bundle) ---------- */
 .nb-pieces{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr;gap:7px}
@@ -264,7 +326,7 @@ html.done .nb-tile,html.done .nb-tier,html.done .nb-piece,html.done .nb-mc,html.
 </div></div>
 <script>
 (function(){
-  var DATA = {"url": "https://nobltravel.com/collections/black-friday-sale", "doneHint": "Tap to shop", "deal": null};
+  var DATA = {"url": "https://nobltravel.com/collections/black-friday-sale", "doneHint": "Tap to shop", "deal": null, "need": null, "wonLine": null};
   var CLICK = DATA.url;
   function openLP(){
     try{
@@ -368,6 +430,20 @@ html.done .nb-tile,html.done .nb-tier,html.done .nb-piece,html.done .nb-mc,html.
     el.classList.add('nb-on');
     el.classList.add('nb-open');
     if (!seen[idx]){ seen[idx] = true; count++; }
+    /* colourway card: the case itself repaints, which is the change happening where
+       the finger is — there is no panel and nothing else moves */
+    var cws = document.querySelectorAll('.nb-cw');
+    if (cws.length){
+      for (var q = 0; q < cws.length; q++){
+        if (Number(cws[q].getAttribute('data-c')) === idx) { cws[q].classList.add('nb-vis'); }
+        else { cws[q].classList.remove('nb-vis'); }
+      }
+      var nms = document.querySelectorAll('.nb-cwname span');
+      for (var r = 0; r < nms.length; r++){
+        if (Number(nms[r].getAttribute('data-c')) === idx) { nms[r].classList.add('nb-vis'); }
+        else { nms[r].classList.remove('nb-vis'); }
+      }
+    }
     var st = document.querySelector('[data-stamp="' + idx + '"]');
     if (st){ st.classList.add('nb-vis'); }
     /* the price card's whole point: the tap is what strikes the retail price through */
@@ -377,6 +453,33 @@ html.done .nb-tile,html.done .nb-tier,html.done .nb-piece,html.done .nb-mc,html.
     if (count >= total){ finish(); }
   }
   for (var k = 0; k < nodes.length; k++){ nodes[k].addEventListener('click', pick); }
+
+  /* ---- pick a card: flip four of nine, each a free gift (the getaway page) ---- */
+  (function(){
+    var grid = document.querySelector('.nb-pgrid');
+    if (!grid) return;
+    var cards = [].slice.call(grid.querySelectorAll('.nb-pc'));
+    var wins = 0, flips = 0, lock = false;
+    var sub = document.getElementById('nb-picks');
+    cards.forEach(function(c){
+      c.addEventListener('click', function(ev){
+        ev.preventDefault(); ev.stopPropagation();
+        if (lock || c.classList.contains('nb-open')) return;
+        c.classList.add('nb-open');
+        flips++;
+        if (c.classList.contains('nb-win')) wins++;
+        if (wins >= (DATA.need || 4)){
+          lock = true;
+          /* the prompt answers itself with the total, in place, the way the page does */
+          document.documentElement.classList.add('nb-won');
+          if (sub && DATA.wonLine) { sub.textContent = DATA.wonLine; }
+          var hint = document.getElementById('hint');
+          if (hint) hint.textContent = DATA.doneHint || 'Tap to shop';
+          window.setTimeout(function(){ document.documentElement.classList.add('done'); }, 420);
+        }
+      });
+    });
+  })();
 
   /* ---- match three (the site's own Black Friday Offer pop-up) ---- */
   (function(){
