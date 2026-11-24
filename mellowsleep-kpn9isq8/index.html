@@ -25,7 +25,7 @@ button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;background:var(--chip);color:var(--mute);padding:3px 7px;border-radius:6px;margin-top:6px}
 .desc{display:block;font-size:12.5px;color:var(--mute);line-height:1.4;margin-top:6px}
 .foot{padding:14px 24px;border-top:1px solid var(--line);font-size:11.5px;color:var(--mute);line-height:1.45}
-.stage{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:0;padding:20px;gap:16px;position:relative}
+.stage{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:0;padding:8px;gap:6px;position:relative;overflow-y:auto}@media(min-width:861px){.stage>.cur{display:none}}
 .cur{text-align:center}
 .cur b{display:block;font-size:17px;font-weight:650}
 .cur span{font-size:12.5px;color:var(--mute)}
@@ -117,8 +117,8 @@ var STUB="<script>(function(w){if(w.__pvStub)return;w.__pvStub=1;var L={},st='lo
     var dev=$('device'), f=$('ad');
     if(mq.matches){ dev.style.removeProperty('--s'); return; }
     var st=document.querySelector('.stage');
-    var availH=st.clientHeight-40-50-40-32, availW=st.clientWidth-40;
-    var s=Math.min(availH/(h+22), availW/(w+22), 1.25); s=Math.max(s,.35);
+    var pad=parseFloat(getComputedStyle(st).paddingTop)||0,gap=parseFloat(getComputedStyle(st).rowGap)||0,chrome=0;[].forEach.call(st.children,function(c){if(c!==dev&&getComputedStyle(c).display!=='none')chrome+=c.getBoundingClientRect().height+gap;});var availH=st.clientHeight-pad*2-chrome, availW=st.clientWidth-pad*2;
+    var s=Math.min(availH/(h+22), availW/(w+22), 1.25); s=Math.max(s,.85);
     dev.style.setProperty('--s',s);
     dev.style.width=(w*s+22*s)+'px'; dev.style.height=(h*s+22*s)+'px';
     f.style.width=w+'px'; f.style.height=h+'px'; f.style.transform='scale('+s+')';
