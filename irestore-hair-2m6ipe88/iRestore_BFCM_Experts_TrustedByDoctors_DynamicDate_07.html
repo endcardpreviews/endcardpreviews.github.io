@@ -28,20 +28,10 @@ html.done .play{pointer-events:none!important}
    The thin supporting sentence becomes a label plus boxed digits. It stays ONE
    supporting element under the offer headline, so the three-things rule still holds.
    Class names are prefixed cd* because .pl is already the AS SEEN ON label. */
-#promo{margin-top:6px;font-variant-numeric:tabular-nums;display:flex;flex-direction:column;
- align-items:center;gap:3px}
+#promo{margin-top:7px;display:flex;flex-direction:column;align-items:center;gap:2px}
 #promo .cdlab{font-weight:700;font-size:15px;letter-spacing:.1em;line-height:1;text-transform:none}
-#promo .cdbox{display:flex;align-items:flex-start;gap:3px}
-#promo .cdbox u{display:flex;flex-direction:column;align-items:center;text-decoration:none;
- min-width:37px;padding:3px 4px 2px;border-radius:6px;background:rgba(0,0,0,.07)}
-#promo .cdbox u i{font-style:normal;font-weight:700;font-size:20px;line-height:1;letter-spacing:-.02em}
-#promo .cdbox u s{text-decoration:none;margin-top:2px;font-weight:700;font-size:9px;
- letter-spacing:.11em;opacity:.62}
-#promo .cdbox em{font-style:normal;font-weight:700;font-size:16px;line-height:1.5;opacity:.32}
-#promo .cdstamp{font-weight:700;font-size:11px;letter-spacing:.1em;opacity:.62}
-/* on a red or dark banner the wells have to be light, not dark */
-#bar.on-red #promo .cdbox u{background:rgba(255,255,255,.18)}
-#bar.on-red #promo .cdbox u s,#bar.on-red #promo .cdstamp{opacity:.82}
+#promo .cdsub{font-weight:500;font-size:12.5px;letter-spacing:.01em;line-height:1.25}
+#bar.on-red #promo .cdsub,#bar.on-red #promo .cdstamp{opacity:.88}
 /* ---- stage ---- */
 #stage{flex:1 1 auto;width:100%;position:relative;display:flex;flex-direction:column;align-items:center;min-height:0}
 h1{margin:0;font-weight:700;letter-spacing:-.022em;line-height:1.08;text-align:center}
@@ -198,16 +188,6 @@ h1 em{font-style:normal;color:#4E5357;font-weight:400;display:block;font-size:14
      The countdown runs to those calendar dates, never to an unpublished offer deadline. */
   var BF=new Date(2026,10,27,0,0,0), CM=new Date(2026,10,30,0,0,0);
   function endOfDay(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()+1, 0, 0, 0); }
-  function cdParts(ms){
-    if(ms<0) ms=0;
-    var k=Math.floor(ms/1000), d=Math.floor(k/86400); k-=d*86400;
-    var h=Math.floor(k/3600); k-=h*3600;
-    var m=Math.floor(k/60); k-=m*60;
-    var out=[];
-    if(d>0) out.push([pad(d),'DAYS']);
-    out.push([pad(h),'HRS'],[pad(m),'MIN'],[pad(k),'SEC']);
-    return out;
-  }
   /* Emily asked for the Black Friday line and the countdown to be a lot more obvious,
      so line() hands back its pieces and tick() sets them as real type: a block label
      over boxed digits, instead of one thin sentence. */
@@ -215,26 +195,18 @@ h1 em{font-style:normal;color:#4E5357;font-weight:400;display:block;font-size:14
     var base=baseDate(), now=new Date(), real=!/promo-date=/.test(location.search);
     var t=real?now:base, y=base.getFullYear(), mo=base.getMonth(), da=base.getDate();
     var onBF = (y===2026&&mo===10&&da===27), onCM=(y===2026&&mo===10&&da===30);
-    if(onBF) return {label:'BLACK FRIDAY ENDS IN', ms:endOfDay(base)-t, stamp:stamp(base)};
-    if(onCM) return {label:'CYBER MONDAY ENDS IN', ms:endOfDay(base)-t, stamp:stamp(base)};
-    if(base<BF && base>=new Date(2026,10,14)) return {label:'BLACK FRIDAY IN', ms:BF-t, stamp:stamp(base)};
-    if(base>BF && base<CM) return {label:'CYBER MONDAY IN', ms:CM-t, stamp:stamp(base)};
+    if(onBF) return {label:'BLACK FRIDAY', ms:endOfDay(base)-t, stamp:stamp(base)};
+    if(onCM) return {label:'CYBER MONDAY', ms:endOfDay(base)-t, stamp:stamp(base)};
+    if(base<BF && base>=new Date(2026,10,14)) return {label:'BLACK FRIDAY', ms:BF-t, stamp:stamp(base)};
+    if(base>BF && base<CM) return {label:'CYBER MONDAY', ms:CM-t, stamp:stamp(base)};
     return {label:'LIMITED TIME OFFER', ms:null, stamp:stamp(base)};
   }
   function tick(){
     var el=D.getElementById('promo'); if(!el) return;
-    var L=line(), h='<b class="cdlab">'+L.label+'</b>';
-    if(L.ms!==null){
-      h+='<span class="cdbox">';
-      var ps=cdParts(L.ms);
-      for(var i=0;i<ps.length;i++){
-        h+='<u><i>'+ps[i][0]+'</i><s>'+ps[i][1]+'</s></u>';
-        if(i<ps.length-1) h+='<em>:</em>';
-      }
-      h+='</span>';
-    }
-    h+='<span class="cdstamp">'+L.stamp+'</span>';
-    el.innerHTML=h;
+    var L=line();
+    el.innerHTML = '<b class="cdlab">'+L.label+'</b>'
+                 + '<span class="cdsub">Our biggest sale of the year</span>'
+                 + '<span class="cdstamp">'+L.stamp+'</span>';
   }
   tick();
   setInterval(tick, 1000);
