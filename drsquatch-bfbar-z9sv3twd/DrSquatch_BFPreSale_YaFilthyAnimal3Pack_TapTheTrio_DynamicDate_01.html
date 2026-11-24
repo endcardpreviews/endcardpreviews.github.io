@@ -48,6 +48,43 @@ body{font-family:'dsqAdrianna',"Helvetica Neue",Arial,sans-serif;-webkit-font-sm
   60%{box-shadow:0 2px 8px rgba(0,0,0,.5),0 0 0 8px rgba(255,255,255,0)}}
 .dsq-photo{position:absolute;left:0;right:0;top:0;height:126px;border-radius:8px;overflow:hidden;background:#000}
 .dsq-photo img{width:100%;height:100%;object-fit:cover;display:block}
+/* Interactions that happen on the product, with no bottom panel. */
+.dsq-call{position:absolute;z-index:8;max-width:188px;padding:7px 9px;border-radius:8px;
+  background:#FBF8F2;color:#0A0A0B;border-left:5px solid #B5292A;box-shadow:0 6px 18px rgba(0,0,0,.5);
+  opacity:0;transform:translateY(5px) scale(.97);transition:opacity .16s ease,transform .16s ease;
+  pointer-events:none}
+.dsq-call.dsq-vis{opacity:1;transform:translateY(0) scale(1)}
+.dsq-call .dsq-ct{display:block;font-weight:700;font-size:12px;line-height:14px;letter-spacing:.01em;
+  text-transform:uppercase}
+.dsq-call .dsq-cb{display:block;margin-top:2px;font-weight:400;font-size:10px;line-height:13px;
+  color:rgba(10,10,11,.8)}
+.dsq-flipgrid{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.dsq-flip{position:relative;border:0;padding:0;background:none;cursor:pointer;height:100%;
+  perspective:620px;-webkit-perspective:620px}
+.dsq-flip .dsq-face{position:absolute;inset:0;border-radius:8px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:6px 8px;text-align:center;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  transition:transform .4s ease,opacity .12s ease}
+.dsq-flip .dsq-front{background:rgba(251,248,242,.95);color:#0A0A0B;transform:rotateY(0deg);
+  border:1px solid rgba(0,0,0,.12)}
+.dsq-flip .dsq-back{background:#B5292A;color:#fff;transform:rotateY(180deg)}
+.dsq-flip.dsq-open .dsq-front{transform:rotateY(-180deg);opacity:0;transition:transform .4s ease,opacity .12s .22s}
+.dsq-flip.dsq-open .dsq-back{transform:rotateY(0deg)}
+.dsq-fk{font-weight:700;font-size:11px;line-height:13px;letter-spacing:.02em;text-transform:uppercase}
+.dsq-fb{margin-top:2px;font-weight:400;font-size:10px;line-height:12px}
+.dsq-fhint{margin-top:3px;font-weight:700;font-size:9px;line-height:11px;letter-spacing:.09em;
+  text-transform:uppercase;color:#B5292A}
+.dsq-thumbs{position:absolute;left:0;right:0;bottom:0;display:grid;gap:7px}
+.dsq-thumb{position:relative;border:1px solid rgba(255,255,255,.22);border-radius:8px;overflow:hidden;
+  background:rgba(251,248,242,.1);padding:0;cursor:pointer;height:100%}
+.dsq-thumb img{width:100%;height:100%;object-fit:contain;display:block}
+.dsq-thumb.dsq-on{border-color:#B5292A;box-shadow:0 0 0 2px #B5292A inset}
+.dsq-cname{position:absolute;left:50%;bottom:0;transform:translateX(-50%);z-index:7;
+  padding:5px 12px;border-radius:7px;background:#FBF8F2;color:#0A0A0B;border-left:5px solid #B5292A;
+  font-weight:700;font-size:13px;line-height:15px;letter-spacing:.02em;text-transform:uppercase;
+  white-space:nowrap;box-shadow:0 5px 14px rgba(0,0,0,.45);
+  transition:opacity .14s ease,transform .14s ease}
+html.dsq-nm .dsq-cname{opacity:0;transform:translateX(-50%) translateY(6px)}
 .dsq-disc{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;z-index:0}
 .dsq-swapWrap{position:absolute;left:0;right:0;top:0}
 .dsq-swap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:100%;max-height:100%;
@@ -117,7 +154,7 @@ html.done .dsq-pin{animation:none}
     <div class="dsq-hint" id="hint">Tap each bar</div>
   </div>
   <div class="dsq-pricebar"><span class="dsq-pname">Ya Filthy Animal 3-Pack</span><span class="dsq-pnow">$22.80</span><span class="dsq-pwas">$24.00</span></div>
-  <div class="dsq-panel" id="dsq-panel">
+<div class="dsq-panel" id="dsq-panel">
     <div class="dsq-pwrap">
       <div class="dsq-ptitle" id="dsq-ptitle"></div>
       <div class="dsq-pbody" id="dsq-pbody"></div>
@@ -128,7 +165,7 @@ html.done .dsq-pin{animation:none}
 </div></div>
 <script>
 (function(){
-  var DATA = {"items": [{"t": "What's in the pack", "b": "Ya Filthy Animal x3 — three limited-edition Men’s Natural Soap bars, net wt 5 oz (141 g) each."}, {"t": "Cool, wintery freshness", "b": "Notes of frosted pine needles and crisp juniper capture cool, wintery freshness."}, {"t": "Smooth, cozy warmth", "b": "Scents of sandalwood and mistletoe berry round things out with smooth, cozy warmth that lasts long after the traps are set."}], "intro": {"t": "Home Alone, in the shower", "b": "Turn your shower into a holiday hideout and lather up with the freshness of this Home Alone-inspired 3-pack."}, "done": {"t": "Three bars, one scent", "b": "Wild Mint Extract · Light grit · 5 oz bars. Limited Edition — only while supplies last."}, "url": "https://www.drsquatch.com/products/ya-filthy-animal-3-pack"};
+  var DATA = {"items": [{"t": "What's in the pack", "b": "Ya Filthy Animal x3 — three limited-edition Men’s Natural Soap bars, net wt 5 oz (141 g) each.", "n": ""}, {"t": "Cool, wintery freshness", "b": "Notes of frosted pine needles and crisp juniper capture cool, wintery freshness.", "n": ""}, {"t": "Smooth, cozy warmth", "b": "Scents of sandalwood and mistletoe berry round things out with smooth, cozy warmth that lasts long after the traps are set.", "n": ""}], "intro": {"t": "Home Alone, in the shower", "b": "Turn your shower into a holiday hideout and lather up with the freshness of this Home Alone-inspired 3-pack."}, "done": {"t": "Three bars, one scent", "b": "Wild Mint Extract · Light grit · 5 oz bars. Limited Edition — only while supplies last."}, "url": "https://www.drsquatch.com/products/ya-filthy-animal-3-pack"};
   var CLICK = DATA.url;
   function openLP(){
     try{
@@ -190,9 +227,11 @@ html.done .dsq-pin{animation:none}
      happening. Now the panel drops its text, widens its accent edge and brings
      the new text back up. */
   var swapT = null;
+  var hasPanel = !!(title && bodyEl);
   function write(o){ title.textContent = o.t; bodyEl.textContent = o.b; }
   function show(o, animate){
     var root = document.documentElement;
+    if (!hasPanel){ return; }   /* on-product cards carry no bottom panel */
     if (!animate){ write(o); return; }
     if (swapT){ window.clearTimeout(swapT); }
     root.classList.add('dsq-sw');
@@ -207,6 +246,9 @@ html.done .dsq-pin{animation:none}
   /* ---- interaction ---- */
   var nodes = [].slice.call(document.querySelectorAll('[data-qa="tap"][data-i]'));
   var swaps = [].slice.call(document.querySelectorAll('.dsq-swap'));
+  var calls = [].slice.call(document.querySelectorAll('.dsq-call'));
+  var nameEl = document.getElementById('dsq-cname');
+  var nameT = null;
   var seen = [], total = nodes.length, count = 0, finished = false;
   for (var i = 0; i < total; i++){ seen.push(false); }
 
@@ -226,6 +268,24 @@ html.done .dsq-pin{animation:none}
     for (var s = 0; s < swaps.length; s++){
       if (s === idx){ swaps[s].classList.add('dsq-vis'); }
       else { swaps[s].classList.remove('dsq-vis'); }
+    }
+    /* a caption anchored to the hotspot that was touched */
+    for (var q = 0; q < calls.length; q++){
+      if (q === idx){ calls[q].classList.add('dsq-vis'); }
+      else { calls[q].classList.remove('dsq-vis'); }
+    }
+    /* a tile that turns over and stays over */
+    if (el.className.indexOf('dsq-flip') > -1){ el.classList.add('dsq-open'); }
+    /* the name riding on the image, dropped and brought back so the change shows */
+    if (nameEl && DATA.items[idx] && DATA.items[idx].n){
+      var root2 = document.documentElement;
+      if (nameT){ window.clearTimeout(nameT); }
+      root2.classList.add('dsq-nm');
+      nameT = window.setTimeout(function(){
+        nameEl.textContent = DATA.items[idx].n;
+        root2.classList.remove('dsq-nm');
+        nameT = null;
+      }, 130);
     }
     show(DATA.items[idx], true);
     if (count >= total && !finished){
