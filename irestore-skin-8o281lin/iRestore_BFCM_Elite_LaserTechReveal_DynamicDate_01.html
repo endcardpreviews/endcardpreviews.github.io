@@ -22,8 +22,7 @@ body{display:flex;align-items:center;justify-content:center;background:var(--ban
 #head .wm{margin:0 auto}
 #banner{flex:0 0 auto;background:var(--bar);color:#fff;text-align:center;padding:9px 12px 10px}
 #offer{font-weight:700;line-height:.9;letter-spacing:-.035em;font-size:46px;margin:0}
-#dateline{font-size:11px;font-weight:500;letter-spacing:.045em;line-height:1.25;margin-top:6px;
- opacity:.96;white-space:nowrap}
+#dateline{font-variant-numeric:tabular-nums;display:flex;flex-direction:column;align-items:center;gap:3px;white-space:normal;margin-top:8px;}#dateline .dlab{font-size:15px;font-weight:700;letter-spacing:.09em;line-height:1}#dateline .dbox{display:flex;align-items:flex-start;gap:3px}#dateline .dbox u{display:flex;flex-direction:column;align-items:center;text-decoration:none;min-width:37px;padding:3px 4px 2px;border-radius:6px;background:rgba(255,255,255,.2)}#dateline .dbox u i{font-style:normal;font-weight:700;font-size:20px;line-height:1;letter-spacing:-.02em}#dateline .dbox u s{text-decoration:none;margin-top:2px;font-weight:700;font-size:9px;letter-spacing:.1em;opacity:.8}#dateline .dbox em{font-style:normal;font-weight:700;font-size:16px;line-height:1.5;opacity:.5}#dateline .dstamp{font-size:11px;font-weight:700;letter-spacing:.1em;opacity:.85}
 #dateline b{font-weight:700;font-variant-numeric:tabular-nums}
 /* ---- stage ---- */
 #stage{position:relative;flex:1 1 auto;min-height:0;display:flex;flex-direction:column;
@@ -148,14 +147,24 @@ html.done .ia{pointer-events:none!important}
     if (!el) return;
     var d = now(), p = phase(d);
     var today = MON[d.getMonth()] + ' ' + d.getDate();
-    if (!p) { el.innerHTML = today + ' &middot; LIMITED TIME OFFER'; return; }
+    if (!p) { el.innerHTML = '<b class="dlab">LIMITED TIME OFFER</b>' +
+      '<span class="dstamp">' + today + '</span>'; return; }
     var left = Math.max(0, p.end - d);
     var days = Math.floor(left / 86400000);
     var h = Math.floor(left / 3600000) % 24, m = Math.floor(left / 60000) % 60, s = Math.floor(left / 1000) % 60;
-    var clock = (days > 0 ? days + 'D ' : '') + pad(h) + ':' + pad(m) + ':' + pad(s);
-    var tail = days > 0 ? 'ENDS ' + DAY[p.end.getDay()] + ' ' + MON[p.end.getMonth()] + ' ' + p.end.getDate()
-                        : 'ENDS TONIGHT';
-    el.innerHTML = today + ' &middot; ' + p.label + ' ' + tail + ' &middot; <b>' + clock + '</b>';
+    /* Emily, 2026-11-23: the Black Friday line and the countdown have to be a lot more
+       obvious, so they are set as a block label over boxed digits rather than one line. */
+    var cells = [];
+    if (days > 0) cells.push([pad(days), 'DAYS']);
+    cells.push([pad(h), 'HRS'], [pad(m), 'MIN'], [pad(s), 'SEC']);
+    var boxes = '';
+    for (var i = 0; i < cells.length; i++) {
+      boxes += '<u><i>' + cells[i][0] + '</i><s>' + cells[i][1] + '</s></u>';
+      if (i < cells.length - 1) boxes += '<em>:</em>';
+    }
+    var tail = days > 0 ? p.label + ' ENDS IN' : p.label + ' ENDS TONIGHT';
+    el.innerHTML = '<b class="dlab">' + tail + '</b><span class="dbox">' + boxes + '</span>' +
+                   '<span class="dstamp">' + today + '</span>';
   }
   paint();
   setInterval(paint, 1000);
