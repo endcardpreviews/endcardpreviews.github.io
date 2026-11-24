@@ -20,9 +20,9 @@ body{font-family:'wsPoppins',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoo
 /* the site's own announcement bar */
 .ws-promo{position:absolute;left:0;right:0;top:0;height:40px;z-index:6;background:#5F39A4;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:0 10px}
-.ws-pm1{display:block;font-weight:700;font-size:12px;line-height:14px;letter-spacing:.06em;
+.ws-pm1{display:block;font-weight:600;font-size:11.5px;line-height:14px;letter-spacing:.04em;
   color:#fff;text-transform:uppercase;white-space:nowrap}
-.ws-pm2{display:block;font-weight:400;font-size:11px;line-height:13px;letter-spacing:.03em;
+.ws-pm2{display:block;font-weight:400;font-size:11px;line-height:13px;letter-spacing:.04em;
   color:#fff;text-transform:uppercase;white-space:nowrap}
 
 .ws-top{position:absolute;left:0;right:0;top:48px;text-align:center;z-index:4}
@@ -53,33 +53,108 @@ body{font-family:'wsPoppins',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoo
 .ws-pr s{font-weight:400;font-size:10px;color:#8E9198;margin-left:4px}
 
 /* category board */
+.ws-flip{position:relative;border:0;padding:0;background:none;cursor:pointer;height:100%;width:100%;
+  perspective:640px;-webkit-perspective:640px}
+.ws-flip .ws-face{position:absolute;inset:0;border-radius:10px;overflow:hidden;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  transition:transform .42s ease,opacity .12s ease;border:1px solid #E4E5E9;background:#fff}
+.ws-flip .ws-front{transform:rotateY(0deg);display:flex;flex-direction:column}
+.ws-flip .ws-back{transform:rotateY(180deg);background:#5F39A4;border-color:#5F39A4;
+  color:#fff;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+  padding:8px 9px;text-align:left}
+.ws-flip.ws-open .ws-front{transform:rotateY(-180deg);opacity:0;
+  transition:transform .42s ease,opacity .12s .24s}
+.ws-flip.ws-open .ws-back{transform:rotateY(0deg)}
+.ws-bt{display:block;font-weight:700;font-size:11px;line-height:13px;letter-spacing:.02em;
+  text-transform:uppercase;color:#fff}
+.ws-bb{display:block;margin-top:3px;font-weight:400;font-size:10px;line-height:12.5px;
+  color:rgba(255,255,255,.93)}
 .ws-board{position:absolute;inset:0;display:grid;gap:8px}
 .ws-tileBtn{position:relative;border:1px solid #E4E5E9;border-radius:10px;overflow:hidden;
   background:#fff;padding:0;cursor:pointer;transition:border-color .16s ease,box-shadow .16s ease}
 .ws-tileBtn.ws-on{border-color:#5F39A4;box-shadow:0 0 0 2px #5F39A4 inset}
 .ws-tileBtn img{width:100%;height:100%;object-fit:cover;display:block}
-.ws-board.ws-fitContain .ws-tileBtn img{object-fit:contain;background:#fff}
+.ws-board.ws-fitContain .ws-tileFace img{object-fit:contain;background:#fff}
+.ws-tileFace{padding:0}
+/* the row treatment: the product sits on a tinted panel beside its own label and price */
+/* .ws-flip .ws-front sets flex-direction:column and outranks a single class, which
+   pushed the row's text out of the tile entirely — match its specificity here. */
+.ws-flip .ws-front.ws-rowFace{display:flex;flex-direction:row;align-items:center;gap:10px;
+  padding:0 12px 0 0;background:linear-gradient(90deg,#F2ECFB 0%,#FBFAFE 62%)}
+.ws-rowFace .ws-rimg{flex:0 0 auto;width:120px;height:100%;display:block;object-fit:contain;
+  background:#fff;border-right:1px solid #E4E5E9}
+.ws-rowTxt{flex:1 1 auto;min-width:0;text-align:left}
+.ws-rowTxt .ws-rk{display:block;font-weight:700;font-size:9.5px;line-height:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:#5F39A4}
+.ws-rowTxt .ws-rn{display:block;margin-top:2px;font-weight:700;font-size:15px;line-height:17px;
+  letter-spacing:-.005em;text-transform:uppercase;color:#0B0B0C}
+.ws-rowTxt .ws-rp{display:block;margin-top:3px;font-weight:600;font-size:11px;line-height:13px;
+  color:rgba(11,11,12,.66)}
+.ws-rowTxt .ws-rgo{display:inline-block;margin-top:5px;font-weight:700;font-size:9.5px;line-height:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#5F39A4;
+  padding:3px 7px;border-radius:3px}
+.ws-tileFace img{width:100%;height:100%;object-fit:cover;display:block}
+.ws-tileFace .ws-lbl{position:absolute;left:0;right:0;bottom:0;background:rgba(255,255,255,.93);
+  font-weight:700;font-size:10px;line-height:12px;letter-spacing:.09em;text-transform:uppercase;
+  padding:5px 4px;color:#0B0B0C;text-align:center}
 .ws-tileBtn .ws-lbl{position:absolute;left:0;right:0;bottom:0;background:rgba(255,255,255,.93);
   font-weight:700;font-size:10px;line-height:12px;letter-spacing:.09em;text-transform:uppercase;
   padding:5px 4px;color:#0B0B0C;text-align:center}
 
-/* video carousel */
+/* video carousel — a real track, so the next clip peeks in at both edges */
 .ws-reel{position:absolute;left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;
-  align-items:center;gap:8px}
-.ws-vwrap{position:relative;width:216px;height:300px;border-radius:12px;overflow:hidden;
-  background:#111;flex:0 0 auto;box-shadow:0 6px 20px rgba(11,11,12,.18)}
-.ws-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;
-  transition:opacity .22s ease}
-.ws-vid.ws-vis{opacity:1}
-.ws-pcards{flex:0 0 auto;width:100%;position:relative;height:52px}
-.ws-pcard{position:absolute;inset:0;display:flex;align-items:center;gap:8px;border:1px solid #E4E5E9;
-  border-radius:10px;background:#fff;padding:6px 8px;opacity:0;transition:opacity .2s ease}
+  align-items:center;gap:10px}
+.ws-vwrap{position:relative;width:100%;height:300px;flex:0 0 auto;overflow:hidden}
+.ws-vtrack{position:absolute;left:0;top:0;height:100%;display:flex;gap:12px;
+  transition:transform .40s cubic-bezier(.22,.61,.36,1)}
+.ws-slide{position:relative;width:214px;height:100%;flex:0 0 auto;border-radius:14px;
+  overflow:hidden;background:#111;transform:scale(.90);opacity:.42;
+  transition:transform .40s cubic-bezier(.22,.61,.36,1),opacity .34s ease,box-shadow .34s ease}
+.ws-slide.ws-vis{transform:scale(1);opacity:1;box-shadow:0 10px 26px rgba(11,11,12,.22)}
+.ws-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* the clip's own frame furniture: a counter pill and a bottom scrim with the shade name */
+.ws-num{position:absolute;left:9px;top:9px;z-index:3;display:flex;align-items:center;gap:5px;
+  height:19px;padding:0 8px;border-radius:10px;background:rgba(11,11,12,.62);
+  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
+  font-weight:700;font-size:9.5px;line-height:19px;letter-spacing:.1em;color:#fff;
+  opacity:0;transition:opacity .3s ease}
+.ws-slide.ws-vis .ws-num{opacity:1}
+.ws-num i{display:block;width:5px;height:5px;border-radius:50%;background:#fff;opacity:.9}
+.ws-slide .ws-scrim{position:absolute;left:0;right:0;bottom:0;height:62px;z-index:2;
+  background:linear-gradient(0deg,rgba(11,11,12,.72) 0%,rgba(11,11,12,0) 100%)}
+.ws-slide .ws-cap{position:absolute;left:10px;right:10px;bottom:8px;z-index:3;text-align:left;
+  font-weight:600;font-size:10px;line-height:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:#fff;opacity:0;transition:opacity .3s ease}
+.ws-slide.ws-vis .ws-cap{opacity:1}
+/* the product card under the reel */
+.ws-pcards{flex:0 0 auto;width:100%;position:relative;height:62px}
+.ws-pcard{position:absolute;inset:0;display:flex;align-items:stretch;border:1px solid #E4E5E9;
+  border-radius:12px;background:#fff;overflow:hidden;opacity:0;
+  transition:opacity .22s ease;box-shadow:0 3px 12px rgba(11,11,12,.06)}
 .ws-pcard.ws-vis{opacity:1}
-.ws-pcard img{width:44px;height:44px;object-fit:contain;flex:0 0 auto}
-.ws-pcard .ws-ptxt{flex:1 1 auto;min-width:0;text-align:left}
-.ws-dots{flex:0 0 auto;display:flex;gap:6px;justify-content:center}
-.ws-dot{width:26px;height:4px;border-radius:2px;background:#E4E5E9;border:0;padding:0;cursor:pointer}
-.ws-dot.ws-on{background:#5F39A4}
+.ws-pcard .ws-pthumb{flex:0 0 auto;width:62px;height:100%;display:flex;align-items:center;
+  justify-content:center;background:linear-gradient(135deg,#F2ECFB 0%,#FBFAFE 100%);
+  border-right:1px solid #E4E5E9}
+.ws-pcard .ws-pthumb img{width:54px;height:54px;object-fit:contain;display:block}
+.ws-pcard .ws-ptxt{flex:1 1 auto;min-width:0;text-align:left;padding:8px 10px;
+  display:flex;flex-direction:column;justify-content:center}
+.ws-pcard .ws-prow{display:flex;align-items:center;gap:6px;min-width:0}
+.ws-pcard .ws-poff{flex:0 0 auto;font-weight:700;font-size:9px;
+  line-height:11px;letter-spacing:.09em;text-transform:uppercase;color:#fff;background:#5F39A4;
+  padding:2px 5px;border-radius:2px}
+.ws-pcard .ws-pgo{flex:0 0 auto;width:30px;display:flex;align-items:center;justify-content:center;
+  color:#5F39A4;font-weight:700;font-size:15px;line-height:1}
+/* a segmented progress bar reads as a reel; plain dots read as a slideshow */
+.ws-dots{flex:0 0 auto;display:flex;gap:5px;justify-content:center;width:100%;padding:0 2px}
+.ws-dot{flex:1 1 0;height:3px;border-radius:2px;background:#E4E5E9;border:0;padding:0;cursor:pointer;
+  position:relative;overflow:hidden;transition:background .2s ease}
+.ws-dot:after{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:#5F39A4;
+  transition:width .36s ease}
+.ws-dot.ws-seen:after{width:100%;background:#B9BCC2}
+.ws-dot.ws-on:after{width:100%;background:#5F39A4}
+.ws-pcard .ws-ptxt .ws-nm{font-size:10.5px;line-height:12px}
+.ws-pcard .ws-ptxt .ws-pr{margin-top:3px;font-size:15px;line-height:17px}
+.ws-pcard .ws-ptxt .ws-pr s{font-size:11px;margin-left:5px}
 
 /* hero */
 .ws-heroWrap{position:absolute;inset:0;border-radius:12px;overflow:hidden;
@@ -93,13 +168,17 @@ body{font-family:'wsPoppins',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoo
   display:flex;align-items:center;justify-content:center;text-align:center;z-index:5;
   box-shadow:0 6px 18px rgba(11,11,12,.3);transition:transform .2s ease}
 .ws-disc.ws-on{transform:translate(-50%,-50%) scale(1.08)}
-.ws-stamp{position:absolute;left:12px;right:12px;top:128px;z-index:5;text-align:center;
+.ws-stamp{position:absolute;left:30px;right:30px;top:128px;z-index:5;text-align:center;
   opacity:0;transform:translateY(8px);transition:opacity .25s ease,transform .25s ease}
 .ws-stamp.ws-vis{opacity:1;transform:translateY(0)}
 .ws-stamp .ws-s1{display:block;font-weight:600;font-size:12px;line-height:14px;letter-spacing:.14em;
   text-transform:uppercase;color:#fff}
-.ws-stamp .ws-s2{display:block;font-weight:700;font-size:34px;line-height:34px;letter-spacing:-.02em;
-  text-transform:uppercase;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.ws-stamp .ws-s2{display:block;font-weight:700;font-size:27px;line-height:29px;letter-spacing:-.02em;
+  text-transform:uppercase;
+  /* the banner's own headline is a brushed-silver fill, not flat white */
+  background:linear-gradient(176deg,#FFFFFF 6%,#E7E4EE 34%,#A79FB8 56%,#F3F1F7 78%,#CFC9DB 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
 
 .ws-chiprow{position:absolute;left:12px;right:12px;top:560px;height:18px;z-index:5}
 .ws-hint{position:absolute;left:50%;top:0;transform:translateX(-50%);height:18px;padding:0 11px;
@@ -218,6 +297,24 @@ html.done .ws-cell,html.done .ws-tileBtn,html.done .ws-dot,html.done .ws-disc{po
   var vids  = [].slice.call(document.querySelectorAll('.ws-vid'));
   var stamp = document.querySelector('.ws-stamp');
   var pcards= [].slice.call(document.querySelectorAll('.ws-pcard'));
+  var slides= [].slice.call(document.querySelectorAll('.ws-slide'));
+  var track = document.getElementById('ws-track');
+
+  /* the reel is a track, not a stack: centre the chosen clip and let its neighbours
+     peek in at both edges, which is what tells the viewer there is more to swipe. */
+  function centre(idx){
+    if (!track || !slides.length) return;
+    var port = track.parentNode.offsetWidth || 336;
+    var sw = slides[0].offsetWidth || 214;
+    var gap = 12;
+    track.style.transform = 'translateX(' + ((port - sw) / 2 - idx * (sw + gap)) + 'px)';
+  }
+  centre(0);
+  window.addEventListener('resize', function(){
+    for (var i = 0; i < slides.length; i++){
+      if (slides[i].classList.contains('ws-vis')){ centre(i); return; }
+    }
+  });
 
   function playOnly(idx){
     for (var i = 0; i < vids.length; i++){
@@ -229,6 +326,11 @@ html.done .ws-cell,html.done .ws-tileBtn,html.done .ws-dot,html.done .ws-disc{po
         try{ vids[i].pause(); }catch(e){}
       }
     }
+    for (var s = 0; s < slides.length; s++){
+      if (s === idx){ slides[s].classList.add('ws-vis'); }
+      else { slides[s].classList.remove('ws-vis'); }
+    }
+    centre(idx);
   }
   /* EC checklist item 5: a creative that carries video must stop it when the slot is
      not viewable and start it again when it is. */
@@ -256,10 +358,15 @@ html.done .ws-cell,html.done .ws-tileBtn,html.done .ws-dot,html.done .ws-disc{po
     var el = this, idx = Number(el.getAttribute('data-i'));
     for (var j = 0; j < nodes.length; j++){
       nodes[j].classList.remove('ws-on');
+      /* only one tile is ever face-down, so the product stays on screen throughout
+         and the finished state is never a wall of text */
+      if (nodes[j] !== this){ nodes[j].classList.remove('ws-open'); }
       if (seen[j]) { nodes[j].classList.add('ws-seen'); }
     }
     el.classList.remove('ws-seen');
     el.classList.add('ws-on');
+    /* a tile turns over where it stands and stays over */
+    if (el.className.indexOf('ws-flip') > -1){ el.classList.add('ws-open'); }
     if (vids.length){
       playOnly(idx);
       for (var q = 0; q < pcards.length; q++){
