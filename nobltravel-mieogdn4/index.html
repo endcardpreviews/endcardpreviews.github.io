@@ -1,0 +1,161 @@
+<!doctype html><html><head><meta charset=utf8><meta name="robots" content="noindex"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
+<title>NOBL Travel Concepts</title>
+<style>
+:root{--bg:#F2F2F2;--panel:#FFFFFF;--ink:#121212;--mute:#6B6B6B;--line:#E2E2E2;--chip:#EDEDED;--dev:#141414;--toast:rgba(20,20,20,.92);--toast-fg:#FFFFFF}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#151413;--panel:#1E1D1B;--ink:#F2EFEA;--mute:#A39E96;--line:#34312D;--chip:#2A2825;--dev:#050505;--toast:rgba(242,239,234,.95);--toast-fg:#151413;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#151413;--panel:#1E1D1B;--ink:#F2EFEA;--mute:#A39E96;--line:#34312D;--chip:#2A2825;--dev:#050505;--toast:rgba(242,239,234,.95);--toast-fg:#151413;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.app{display:grid;grid-template-columns:340px 1fr;height:100%}
+.side{background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.brand{padding:28px 24px 18px;border-bottom:1px solid var(--line)}
+.brand small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+.brand h1{font-size:22px;font-weight:650;letter-spacing:-.01em}
+.brand p{font-size:13px;color:var(--mute);margin-top:6px;line-height:1.45}
+.list{list-style:none;overflow:auto;padding:10px;flex:1}
+.list li button{width:100%;text-align:left;display:grid;grid-template-columns:30px 1fr;gap:10px;padding:12px;border-radius:12px;transition:background .15s}
+.list li button:hover{background:var(--chip)}
+.list li button[aria-current="true"]{background:var(--ink);color:var(--bg)}
+.list li button[aria-current="true"] .tag{background:transparent;color:inherit;box-shadow:inset 0 0 0 1px currentColor}
+.list li button[aria-current="true"] .desc{color:inherit;opacity:.75}
+.num{font-size:12px;font-weight:600;opacity:.55;padding-top:2px;font-variant-numeric:tabular-nums}
+.ttl{font-size:15px;font-weight:600;line-height:1.25}
+.tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;background:var(--chip);color:var(--mute);padding:3px 7px;border-radius:6px;margin-top:6px}
+.desc{display:block;font-size:12.5px;color:var(--mute);line-height:1.4;margin-top:6px}
+.foot{padding:14px 24px;border-top:1px solid var(--line);font-size:11.5px;color:var(--mute);line-height:1.45}
+.stage{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:0;padding:4px;gap:4px;position:relative;overflow-y:auto}@media(min-width:861px){.stage>.cur{display:none}}
+.cur{text-align:center}
+.cur b{display:block;font-size:17px;font-weight:650}
+.cur span{font-size:12.5px;color:var(--mute)}
+.device{position:relative;background:var(--dev);border-radius:calc(var(--s)*46px);padding:calc(var(--s)*11px);box-shadow:0 30px 60px -20px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.06);transition:width .35s,height .35s}
+.screen{position:relative;overflow:hidden;border-radius:calc(var(--s)*36px);background:#000;width:100%;height:100%}
+.screen iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;background:#fff}
+.ctrls{display:flex;gap:8px;align-items:center}
+.ctrls button{height:40px;padding:0 16px;border-radius:999px;background:var(--panel);border:1px solid var(--line);font-size:13.5px;font-weight:550;display:inline-flex;align-items:center;gap:7px;transition:transform .1s}
+.ctrls button:active{transform:scale(.97)}
+.ctrls .pg{min-width:58px;text-align:center;font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums}
+.ctrls svg{width:16px;height:16px}
+.toast{position:absolute;left:50%;top:9%;transform:translate(-50%,-12px);opacity:0;pointer-events:none;background:var(--toast);color:var(--toast-fg);font-size:13px;line-height:1.35;padding:10px 14px;border-radius:12px;width:max-content;max-width:86%;text-align:center;transition:opacity .2s,transform .2s;z-index:5}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast b{display:block;font-size:13.5px}
+.mbar{display:none}
+.sheet{display:none}
+@media (max-width:700px),(max-height:520px) and (pointer:coarse){
+  .app{display:block;height:100%}
+  .side,.cur,.ctrls,.stage>.hint{display:none}
+  .stage{position:fixed;inset:0;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);gap:0;display:flex;flex-direction:column;background:var(--panel)}
+  .mbar{display:flex;align-items:center;gap:6px;height:52px;padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px));background:var(--panel);border-bottom:1px solid var(--line);flex:none;width:100%}
+  .mbar .t{flex:1;min-width:0;text-align:left;display:flex;flex-direction:column;padding:0 6px}
+  .mbar .t b{font-size:14.5px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mbar .t span{font-size:11.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mbar .ib{width:40px;height:40px;border-radius:999px;display:grid;place-items:center;flex:none}
+  .mbar .ib:active{background:var(--chip)}
+  .mbar svg{width:20px;height:20px}
+  .device{flex:1;width:100%!important;height:auto!important;border-radius:0;padding:0;box-shadow:none;background:#000}
+  .screen{border-radius:0}
+  .screen iframe{width:100%!important;height:100%!important;transform:none!important}
+  .sheet{position:fixed;inset:0;z-index:10;background:rgba(0,0,0,.4);display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .2s}
+  .sheet.on{opacity:1;pointer-events:auto}
+  .sheet .in{background:var(--panel);width:100%;max-height:78%;overflow:auto;border-radius:18px 18px 0 0;padding:8px 8px calc(16px + env(safe-area-inset-bottom));transform:translateY(20px);transition:transform .2s}
+  .sheet.on .in{transform:none}
+  .sheet h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding:14px 12px 8px}
+  .toast{position:fixed;top:calc(64px + env(safe-area-inset-top,0px))}
+}
+</style>
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <small>Interactive endcard concepts</small>
+      <h1>NOBL Travel</h1>
+      <p>10 interactive endcards for NOBL Travel&rsquo;s Black Friday sale. Every card carries the site&rsquo;s own black sale bar across the top &mdash; the campaign name with the viewer&rsquo;s own date, &ldquo;up to 67% off&rdquo;, and the countdown started where it was asked for, 9:30:50. Six carry the brand&rsquo;s AS SEEN ON strip (Travel+Leisure, Vogue, Forbes, GQ, CNN, lifted from its own hero art); the other four carry the beige LIFETIME WARRANTY / 100&#8209;DAY TRIAL / 1M+ CUSTOMERS row with the site&rsquo;s own icons. Three catalog cards show four products each with the site&rsquo;s SAVE badges and price strikethrough, three are the &lsquo;Black Friday&rsquo; Bundle 6.0, and one is the site&rsquo;s match&#8209;three Black Friday Offer pop-up. Every interaction happens on the thing that was tapped; no card changes a panel at the foot of the frame. Prices come from the live collection JSON and Montserrat is embedded as woff2 in four weights.</p>
+    </div>
+    <ul class="list" id="list"></ul>
+    <div class="foot">Shown on a 9:16 phone. Use Rotate to see the landscape version. CTA taps are shown on this page instead of opening the site.<label style="display:flex;align-items:center;gap:8px;margin-top:12px">Preview date <input type="date" id="pd" value="" style="font:inherit;padding:4px 6px;border-radius:6px;border:1px solid rgba(127,127,127,.4);background:transparent;color:inherit"></label><span style="display:block;margin-top:4px;opacity:.75">Every card picks its campaign line off the viewer&rsquo;s own device clock: Black Friday Sale through Nov&nbsp;26, Black Friday on Nov&nbsp;27, Black Friday Weekend on Nov&nbsp;28&ndash;29, Cyber Monday on Nov&nbsp;30, Cyber Week on Dec&nbsp;1&ndash;2, then Limited Time Offer. The countdown starts at 9:30:50 on every load, as asked. Use the date box above to preview any day.</span></div>
+  </aside>
+  <main class="stage">
+    <div class="mbar">
+      <button class="ib" id="mprev" aria-label="Previous concept"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button class="t" id="mlist" aria-label="All concepts"><b id="mt"></b><span id="ms"></span></button>
+      <button class="ib" id="mre" aria-label="Restart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+      <button class="ib" id="mnext" aria-label="Next concept"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+    <div class="cur"><b id="ct"></b><span id="cs"></span></div>
+    <div class="device" id="device"><div class="screen" id="screen"><iframe id="ad" title="Endcard"></iframe><div class="toast" id="toast"><b>CTA tapped &#10003;</b>In the live ad, this opens the landing page.</div></div></div>
+    <div class="ctrls">
+      <button id="prev" aria-label="Previous concept"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>Prev</button>
+      <span class="pg" id="pg"></span>
+      <button id="next" aria-label="Next concept">Next<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      <button id="re"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Restart</button>
+      <button id="rot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg><span id="rotl">Rotate</span></button>
+    </div>
+  </main>
+</div>
+<div class="sheet" id="sheet"><div class="in"><h2>NOBL Travel &middot; Endcards</h2><ul class="list" id="list2"></ul></div></div>
+<script>
+var C=[{"file": "NOBLTravel_BlackFriday_SitewideSale_TapTheCodes_DynamicDate_01.html", "title": "Sitewide Sale · Tap The Codes", "tag": "Tap The Codes", "desc": "The offers page hero rebuilt for 9:16: the brand's own green field, the BIGGEST SALE OF THE YEAR kicker, and the two offer tiers from the site — $100 off over $500+, $150 off over $750+. Tapping a tier brings its code pill up to full strength, and both stay lit. The luggage line-up is the brand's own hero photography."}, {"file": "NOBLTravel_BlackFriday_BestSellers_TapTheTiles_DynamicDate_02.html", "title": "Best Sellers · Tap The Tiles", "tag": "Tap The Tiles", "desc": "Four best sellers with the site's own SAVE badges and price strikethrough. No flip: the packshots stay on show and a tap rings the tile, lifts the product and adds its saving under the price, so the finished card is four products with four savings."}, {"file": "NOBLTravel_BlackFriday_CarryOnFamily_FlipTheTiles_DynamicDate_03.html", "title": "Carry-On Family · Flip The Tiles", "tag": "Flip The Tiles", "desc": "The four carry-ons, $249 to $299, each turning over in place to a deal face — the packshot again, the saving as a chip, the sale price against the full one, and a Shop button."}, {"file": "NOBLTravel_BlackFriday_TravelAccessories_TapTheTiles_DynamicDate_04.html", "title": "Travel Accessories · Tap The Tiles", "tag": "Tap The Tiles", "desc": "Packing cubes, the vacuum compression set, the LED makeup case and the power bank, 58–67% off, with strikethrough pricing and the saving revealed on the tile."}, {"file": "NOBLTravel_BlackFriday_Bundle60_TapThePieces_DynamicDate_05.html", "title": "Bundle 6.0 · Tap The Pieces", "tag": "Tap The Pieces", "desc": "The 'Black Friday' Bundle 6.0 as the brand shoots it, with four of its eight pieces as chips beneath. Tapping a chip turns its value line green — $876, $969, $470, $166 — against a bundle price of $649."}, {"file": "NOBLTravel_BlackFriday_Bundle60_FlipTheValues_DynamicDate_06.html", "title": "Bundle 6.0 · Flip The Values", "tag": "Flip The Values", "desc": "The same bundle told as what it is worth: four tiles carrying the PDP's own item values, each flipping to its deal face. The fourth stands for the remaining four pieces — cubes, bottle, tag and NOBL Air GPS."}, {"file": "NOBLTravel_BlackFriday_Bundle60_StrikeThePrice_DynamicDate_07.html", "title": "Bundle 6.0 · Strike The Price", "tag": "Strike The Price", "desc": "One tap strikes $1,967 through and sets $649 in its place, on the bundle's own photograph. The headline is the brand's own line: once a year, never restocked."}, {"file": "NOBLTravel_BlackFriday_MatchThree_RevealYourDeal_DynamicDate_08.html", "title": "Match Three · Reveal Your Deal", "tag": "Reveal Your Deal", "desc": "The site's own Black Friday Offer pop-up, rebuilt as a playable: the diagonal BLACK FRIDAY SALE and VIP SALE ribbons, the 3x3 grid of ? cards, and two cases underneath. Three of the nine are $100 OFF; matching all three answers the pop-up's own prompt with the offer and the code, and nothing is laid over the product."}, {"file": "NOBLTravel_BlackFriday_CheckIn28_TapTheSpecs_DynamicDate_09.html", "title": "Check-In 28\" · Tap The Specs", "tag": "Tap The Specs", "desc": "Three marks on the case, each naming a real spec from the PDP — Y-Strap compression, TSA locks, 99L — with every label in the clear margin beside its own mark rather than over the product."}, {"file": "NOBLTravel_BlackFriday_ShopTheSale_TapTheAisles_DynamicDate_10.html", "title": "Shop The Sale · Tap The Aisles", "tag": "Tap The Aisles", "desc": "Carry-ons, check-ins, bags and accessories as four tiles. No flip: a tap rings the aisle and adds its entry price."}];
+var STUB="<script>(function(w){if(w.__pvStub)return;w.__pvStub=1;var L={},st='loading';\nfunction on(e,f){(L[e]=L[e]||[]).push(f)}function fire(e){var a=[].slice.call(arguments,1);(L[e]||[]).slice().forEach(function(f){try{f.apply(null,a)}catch(x){}})}\nfunction cta(u){try{w.parent.postMessage({__pv:'cta',url:u||''},'*')}catch(x){}}\nfunction sz(){return{width:w.innerWidth,height:w.innerHeight}}\nw.mraid={getVersion:function(){return'2.0'},getState:function(){return st},addEventListener:on,\nremoveEventListener:function(e,f){L[e]=(L[e]||[]).filter(function(g){return g!==f})},\nisViewable:function(){return true},getPlacementType:function(){return'interstitial'},\ngetMaxSize:sz,getScreenSize:sz,getCurrentPosition:function(){var s=sz();return{x:0,y:0,width:s.width,height:s.height}},\ngetDefaultPosition:function(){var s=sz();return{x:0,y:0,width:s.width,height:s.height}},\nsupports:function(){return false},useCustomClose:function(){},close:function(){},expand:function(){},resize:function(){},\nsetExpandProperties:function(){},getExpandProperties:function(){return{}},setOrientationProperties:function(){},\ngetOrientationProperties:function(){return{allowOrientationChange:true,forceOrientation:'none'}},\nsetResizeProperties:function(){},playVideo:function(){},storePicture:function(){},createCalendarEvent:function(){},\nopen:function(u){cta(u)}};\nw.open=function(u){cta(u);return null};\nfunction ready(){setTimeout(function(){st='default';fire('stateChange','default');fire('ready');fire('viewableChange',true)},0)}\nif(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready);else ready();\nw.addEventListener('resize',function(){var s=sz();fire('sizeChange',s.width,s.height)});\n})(window);<\/script>\n";
+(function(){
+  var i=0, land=false, W=360, H=640;
+  var $=function(id){return document.getElementById(id)};
+  var mq=window.matchMedia('(max-width:700px),(max-height:520px) and (pointer:coarse)');
+  function prep(h){
+    var m=h.match(/<head[^>]*>/i);
+    var pd=(document.getElementById('pd')||{}).value, inj=STUB+(pd?'<script>window.__PROMO_DATE='+JSON.stringify(pd)+'<\/script>':''); return m ? h.replace(m[0], m[0]+inj) : inj+h;
+  }
+  function item(c,k){
+    var li=document.createElement('li'), b=document.createElement('button');
+    b.innerHTML='<span class="num">'+String(k+1).padStart(2,'0')+'</span><span><span class="ttl"></span><br><span class="tag"></span><span class="desc"></span></span>';
+    b.querySelector('.ttl').textContent=c.title; b.querySelector('.tag').textContent=c.tag; b.querySelector('.desc').textContent=c.desc;
+    b.onclick=function(){ $('sheet').classList.remove('on'); go(k); };
+    li.appendChild(b); return li;
+  }
+  C.forEach(function(c,k){ $('list').appendChild(item(c,k)); $('list2').appendChild(item(c,k)); });
+  function layout(){
+    var w=land?H:W, h=land?W:H;
+    var dev=$('device'), f=$('ad');
+    if(mq.matches){ dev.style.removeProperty('--s'); return; }
+    var st=document.querySelector('.stage');
+    var pad=parseFloat(getComputedStyle(st).paddingTop)||0,gap=parseFloat(getComputedStyle(st).rowGap)||0,chrome=0;[].forEach.call(st.children,function(c){if(c!==dev&&getComputedStyle(c).display!=='none')chrome+=c.getBoundingClientRect().height+gap;});var availH=st.clientHeight-pad*2-chrome, availW=st.clientWidth-pad*2;
+    var s=Math.min(availH/(h+22), availW/(w+22), 1.25); s=Math.max(s,1);
+    dev.style.setProperty('--s',s);
+    dev.style.width=(w*s+22*s)+'px'; dev.style.height=(h*s+22*s)+'px';
+    f.style.width=w+'px'; f.style.height=h+'px'; f.style.transform='scale('+s+')';
+  }
+  function mount(){
+    var old=$('ad'), f=document.createElement('iframe');
+    f.id='ad'; f.title=C[i].title; f.setAttribute('allow','autoplay; vibrate');
+    var k=i; if(C[k].html){f.srcdoc=prep(C[k].html);} else { fetch(C[k].file).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){C[k].html=t; if(i===k&&$('ad')===f) f.srcdoc=prep(t);}).catch(function(){ if($('ad')===f) f.src=C[k].file; }); }
+    old.parentNode.replaceChild(f,old);
+    var c=C[i], n=(i+1)+' / '+C.length;
+    $('ct').textContent=c.title; $('cs').textContent=c.tag+' \u00b7 '+c.desc; $('pg').textContent=n;
+    $('mt').textContent=c.title; $('ms').textContent=n+' \u00b7 '+c.tag;
+    [].forEach.call(document.querySelectorAll('.list'),function(ul){[].forEach.call(ul.children,function(li,k){li.firstChild.setAttribute('aria-current',k===i?'true':'false')})});
+    var a=$('list').children[i]; if(a&&a.scrollIntoView) a.scrollIntoView({block:'nearest'});
+    try{history.replaceState(null,'','#c'+(i+1))}catch(e){}
+    layout();
+  }
+  function go(k){ i=(k+C.length)%C.length; hideToast(); mount(); }
+  var tt; function hideToast(){ clearTimeout(tt); $('toast').classList.remove('on'); }
+  window.addEventListener('message',function(e){
+    var f=$('ad'); if(!e.data||e.data.__pv!=='cta'||e.source!==f.contentWindow) return;
+    var t=$('toast'); t.classList.add('on'); clearTimeout(tt); tt=setTimeout(function(){t.classList.remove('on')},2600);
+  });
+  $('prev').onclick=$('mprev').onclick=function(){go(i-1)};
+  $('next').onclick=$('mnext').onclick=function(){go(i+1)};
+  $('re').onclick=$('mre').onclick=function(){go(i)};
+  if($('pd')) $('pd').onchange=function(){ go(i); };
+  $('rot').onclick=function(){ land=!land; $('rotl').textContent=land?'Portrait':'Landscape'; mount(); };
+  $('rotl').textContent='Landscape';
+  $('mlist').onclick=function(){ $('sheet').classList.add('on'); };
+  $('sheet').onclick=function(e){ if(e.target===this) this.classList.remove('on'); };
+  document.addEventListener('keydown',function(e){ if(e.key==='ArrowRight')go(i+1); else if(e.key==='ArrowLeft')go(i-1); });
+  window.addEventListener('resize',layout);
+  if(mq.addEventListener) mq.addEventListener('change',mount);
+  var h=parseInt((location.hash||'').replace(/^#c?/,''),10); if(h>=1&&h<=C.length) i=h-1;
+  if(C.length<2){ ['prev','next','mprev','mnext'].forEach(function(id){$(id).style.visibility='hidden'}); $('pg').style.display='none'; }
+  mount();
+})();
+</script>
+</body></html>
