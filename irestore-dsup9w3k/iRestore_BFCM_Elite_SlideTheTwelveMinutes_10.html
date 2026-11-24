@@ -223,9 +223,10 @@ h1{font-size:21px;padding:0 26px;color:#fff}
   function tick(){
     var el=D.getElementById('promo'); if(!el) return;
     var L=line();
-    el.innerHTML = '<b class="cdlab">'+L.label+'</b>'
-                 + '<span class="cdsub">Our biggest sale of the year</span>'
-                 + '<span class="cdstamp">'+L.stamp+'</span>';
+    /* Client, 2026-11-23: no dynamic date. The block is the campaign name and the
+       brand's own sale line only — nothing read off the viewer's clock. */
+    el.innerHTML = '<b class="cdlab">BLACK FRIDAY</b>'
+                 + '<span class="cdsub">Our biggest sale of the year</span>';
   }
   tick();
   setInterval(tick, 1000);

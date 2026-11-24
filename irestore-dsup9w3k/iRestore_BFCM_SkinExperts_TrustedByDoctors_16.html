@@ -131,20 +131,10 @@ html.done .ia{pointer-events:none!important}
   function paint(){
     var el = document.getElementById('dateline');
     if (!el) return;
-    var d = now(), p = phase(d);
-    var today = MON[d.getMonth()] + ' ' + d.getDate();
-    if (!p) { el.innerHTML = '<b class="dlab">LIMITED TIME OFFER</b>' +
-      '<span class="dstamp">' + today + '</span>'; return; }
-    /* Emily, 2026-11-23: no countdown. The campaign name, the brand's own sale line,
-       and the viewer's own date — nothing ticking. */
-    el.innerHTML = '<b class="dlab">' + p.label + '</b>'
-                 + '<span class="dsub">Our biggest sale of the year</span>'
-                 + '<span class="dstamp">' + today + '</span>';
-    /* Emily, 2026-11-23: no countdown — the campaign name, the brand's own sale line
-       and the viewer's own date. */
-    el.innerHTML = '<b class="dlab">' + p.label + '</b>'
-                 + '<span class="dsub">Our biggest sale of the year</span>'
-                 + '<span class="dstamp">' + today + '</span>';
+    /* Client, 2026-11-23: no dynamic date — campaign name and the brand's own sale
+       line only, nothing read off the viewer's clock. */
+    el.innerHTML = '<b class="dlab">BLACK FRIDAY</b>'
+                 + '<span class="dsub">Our biggest sale of the year</span>';
   }
   paint();
   setInterval(paint, 1000);
