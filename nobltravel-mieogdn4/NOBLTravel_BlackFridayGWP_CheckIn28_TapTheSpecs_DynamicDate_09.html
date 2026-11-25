@@ -9,6 +9,7 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;height:100%;background:#FFFFFF;overflow:hidden}
 body{font-family:'nbMont',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;color:#282828}
+button,input,select,textarea{font-family:inherit;font-size:inherit;line-height:inherit;color:inherit}
 #nb-fit{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(var(--nb-s,1));
   transform-origin:50% 50%;width:360px;height:640px}
 .nb-card{position:relative;width:360px;height:640px;overflow:hidden;background:#FFFFFF}
@@ -16,21 +17,21 @@ body{font-family:'nbMont',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothi
 /* the site's own Black Friday bar, with its countdown */
 .nb-bar{position:absolute;left:0;right:0;top:0;height:46px;z-index:7;background:#0F2724;
   display:flex;align-items:center;justify-content:center;gap:9px;padding:0 8px}
-.nb-bar .nb-bt{display:block;font-weight:400;font-size:11px;line-height:14px;letter-spacing:.1em;
+.nb-bar .nb-bt{display:block;font-weight:400;font-size:11px;line-height:14px;letter-spacing:.055em;
   color:#fff;white-space:nowrap;text-align:right}
-.nb-bar .nb-bt b{display:block;font-weight:500;font-size:12px;line-height:16px;letter-spacing:.1em}
+.nb-bar .nb-bt b{display:block;font-weight:500;font-size:12px;line-height:16px;letter-spacing:.055em}
 .nb-cd{display:flex;align-items:flex-start;gap:3px;flex:0 0 auto}
 .nb-cd .nb-u{display:flex;flex-direction:column;align-items:center;gap:1px}
 .nb-cd .nb-n{display:block;min-width:22px;padding:1px 3px;border-radius:3px;background:#fff;color:#0F2724;
   font-weight:700;font-size:13px;line-height:16px;text-align:center;font-variant-numeric:tabular-nums}
-.nb-cd .nb-l{display:block;font-weight:600;font-size:7.5px;line-height:9px;letter-spacing:.08em;
+.nb-cd .nb-l{display:block;font-weight:600;font-size:7.5px;line-height:9px;letter-spacing:.1em;
   text-transform:uppercase;color:rgba(255,255,255,.82)}
 .nb-cd .nb-sep{font-weight:700;font-size:13px;line-height:16px;color:#fff;padding:0 1px}
 
 .nb-top{position:absolute;left:0;right:0;top:56px;text-align:center;z-index:5}
 .nb-logo{display:block;margin:0 auto;width:66px;height:auto;color:#1A1919}
 .nb-logo svg{display:block;width:100%;height:auto}
-.nb-hl{font-weight:500;font-size:19px;line-height:23px;letter-spacing:.075em;margin-top:6px;
+.nb-hl{font-weight:500;font-size:19px;line-height:23px;letter-spacing:.055em;margin-top:6px;
   height:40px;color:#282828}
 .nb-hl.nb-hl1{font-size:21px;line-height:25px;padding-top:8px}
 .nb-hl em{font-style:normal;color:#054B48}
@@ -41,7 +42,7 @@ body{font-family:'nbMont',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothi
 /* ---------- credibility bands ---------- */
 .nb-band{position:absolute;left:0;right:0;top:486px;height:62px;z-index:4}
 .nb-press{background:#172D2B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
-.nb-press .nb-seen{display:block;font-weight:600;font-size:9px;line-height:11px;letter-spacing:.17em;
+.nb-press .nb-seen{display:block;font-weight:600;font-size:9px;line-height:11px;letter-spacing:.1em;
   text-transform:uppercase;color:rgba(255,255,255,.72)}
 .nb-press img{display:block;width:304px;height:auto}
 /* THE GIFT WITH PURCHASE — the main offer, so it is on every card (Emily, 2026-11-24).
@@ -49,19 +50,19 @@ body{font-family:'nbMont',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothi
    gift's value in the button green. It takes the place of the as-seen-on / trust bands. */
 .nb-gwp{background:#F6F3EC;display:flex;flex-direction:column;align-items:center;
   justify-content:center;gap:3px;padding:5px 6px 6px}
-.nb-gwp .nb-gclaim{display:block;font-weight:600;font-size:11px;line-height:14px;letter-spacing:.01em;
+.nb-gwp .nb-gclaim{display:block;font-weight:600;font-size:11px;line-height:14px;letter-spacing:.055em;
   color:#054B48;white-space:nowrap}
 .nb-gwp .nb-gclaim b{font-weight:700}
 .nb-grow{display:flex;align-items:flex-end;justify-content:center;gap:4px;width:100%}
 .nb-g{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px}
 .nb-g img{display:block;width:auto;height:28px;max-width:100%;object-fit:contain}
-.nb-g span{display:block;font-weight:700;font-size:9.5px;line-height:11px;letter-spacing:.01em;
+.nb-g span{display:block;font-weight:700;font-size:9.5px;line-height:11px;letter-spacing:.055em;
   color:#054B48;white-space:nowrap}
 .nb-g span s{font-weight:400;color:rgba(5,75,72,.55)}
 .nb-trust{background:#F3F1EC;display:flex;align-items:center;justify-content:space-around;padding:0 8px}
 .nb-trust .nb-ti{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1 1 0;min-width:0}
 .nb-trust .nb-ti img{display:block;width:21px;height:21px}
-.nb-trust .nb-ti span{display:block;font-weight:600;font-size:9px;line-height:11px;letter-spacing:.05em;
+.nb-trust .nb-ti span{display:block;font-weight:600;font-size:9px;line-height:11px;letter-spacing:.1em;
   text-transform:uppercase;color:#282828;white-space:nowrap}
 
 /* ---------- 2x2 catalog ---------- */
@@ -81,27 +82,27 @@ body{font-family:'nbMont',"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothi
   transition:background-color .22s ease}
 .nb-shot img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .26s ease}
 .nb-save{position:absolute;left:6px;top:6px;z-index:2;font-weight:700;font-size:9px;line-height:11px;
-  letter-spacing:.05em;text-transform:uppercase;color:#fff;background:#054B48;padding:3px 5px;border-radius:2px}
+  letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#054B48;padding:3px 5px;border-radius:2px}
 .nb-meta{flex:0 0 auto;padding:4px 7px 5px;text-align:left;background:#fff}
 .nb-nm{display:block;font-weight:500;font-size:10px;line-height:12px;letter-spacing:.055em;
   color:#282828;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nb-pr{display:block;margin-top:3px;font-weight:500;font-size:14.5px;line-height:18px;letter-spacing:normal;
+.nb-pr{display:block;margin-top:3px;font-weight:500;font-size:14.5px;line-height:18px;letter-spacing:.055em;
   color:#282828}
-.nb-pr s{font-weight:400;font-size:11px;letter-spacing:normal;color:#7C7C7C;margin-left:6px}
+.nb-pr s{font-weight:400;font-size:11px;letter-spacing:.055em;color:#7C7C7C;margin-left:6px}
 
 /* the deal face: the product again, the price lockup, one phrase, a Shop chip */
 .nb-dtop{position:relative;flex:1 1 auto;min-height:0;border-radius:6px;overflow:hidden;
   background-color:#fff;background-repeat:no-repeat;background-position:50% 50%;background-size:contain}
 .nb-dchip{position:absolute;left:5px;top:5px;z-index:2;font-weight:700;font-size:9px;line-height:11px;
-  letter-spacing:.06em;text-transform:uppercase;color:#172D2B;background:#fff;padding:2px 5px;
+  letter-spacing:.1em;text-transform:uppercase;color:#172D2B;background:#fff;padding:2px 5px;
   border-radius:2px;box-shadow:0 1px 4px rgba(0,0,0,.2)}
 .nb-dpr{display:block;flex:0 0 auto;margin-top:6px;font-weight:500;font-size:19px;line-height:23px;
-  letter-spacing:.02em;color:#fff}
-.nb-dpr s{font-weight:400;font-size:11px;letter-spacing:0;margin-left:5px;color:rgba(255,255,255,.62)}
+  letter-spacing:.055em;color:#fff}
+.nb-dpr s{font-weight:400;font-size:11px;letter-spacing:.055em;margin-left:5px;color:rgba(255,255,255,.62)}
 .nb-dln{display:block;flex:0 0 auto;margin-top:2px;font-weight:600;font-size:9.5px;line-height:12px;
-  letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+  letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.88)}
 .nb-dgo{display:flex;flex:0 0 auto;align-items:center;justify-content:center;margin-top:6px;height:19px;
-  border-radius:3px;background:#fff;color:#172D2B;font-weight:700;font-size:9.5px;letter-spacing:.11em;
+  border-radius:3px;background:#fff;color:#172D2B;font-weight:700;font-size:9.5px;letter-spacing:.1em;
   text-transform:uppercase}
 
 /* no-flip tiles: the packshot never turns over, the saving arrives under the price */
@@ -114,7 +115,7 @@ html.nb-keep .nb-tile.nb-open .nb-shot img{transform:scale(1.06)}
   transition:max-height .26s ease,opacity .2s ease,margin-top .26s ease}
 .nb-tile.nb-open .nb-revBar{max-height:22px;opacity:1;margin-top:4px}
 .nb-revBar b{display:block;background:#054B48;color:#fff;font-weight:700;font-size:9.5px;line-height:16px;
-  letter-spacing:.06em;text-transform:uppercase;text-align:center;border-radius:3px;padding:0 4px;
+  letter-spacing:.1em;text-transform:uppercase;text-align:center;border-radius:3px;padding:0 4px;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* ---------- hero: the brand's own green field ---------- */
@@ -122,19 +123,19 @@ html.nb-keep .nb-tile.nb-open .nb-shot img{transform:scale(1.06)}
   background:radial-gradient(118% 82% at 50% 30%, #1E3E3B 0%, #172D2B 62%, #122320 100%)}
 .nb-hero img.nb-line{position:absolute;left:0;right:0;bottom:0px;width:100%;height:auto;display:block}
 .nb-kick{position:absolute;left:0;right:0;top:12px;text-align:center;z-index:3;font-weight:500;
-  font-size:11px;line-height:14px;letter-spacing:.115em;text-transform:uppercase;color:#fff}
+  font-size:11px;line-height:14px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
 .nb-tiers{position:absolute;left:10px;right:10px;top:34px;z-index:4;display:flex;gap:8px}
 .nb-tier{flex:1 1 0;border:0;padding:9px 6px 8px;border-radius:8px;cursor:pointer;text-align:center;
   background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);
   transition:background .18s ease,border-color .18s ease}
 .nb-tier.nb-open{background:rgba(255,255,255,.16);border-color:#fff}
-.nb-tier .nb-amt{display:block;font-weight:600;font-size:22px;line-height:26px;letter-spacing:normal;color:#fff}
+.nb-tier .nb-amt{display:block;font-weight:600;font-size:22px;line-height:26px;letter-spacing:.055em;color:#fff}
 .nb-tier .nb-over{display:block;margin-top:1px;font-weight:400;font-size:11px;line-height:15px;
-  letter-spacing:normal;color:#fff}
+  letter-spacing:.055em;color:#fff}
 /* the code is the thing to take away, so it is the site's solid white pill from the first
    frame, never a dimmed one (Emily, 2026-11-24: "can we highlight the code?") */
 .nb-tier .nb-code{display:block;margin:7px auto 0;max-width:112px;background:#fff;color:#000;
-  font-weight:600;font-size:11px;line-height:22px;letter-spacing:normal;border-radius:20px;
+  font-weight:600;font-size:11px;line-height:22px;letter-spacing:.055em;border-radius:20px;
   transition:box-shadow .22s ease,transform .22s ease}
 .nb-tier.nb-open .nb-code{transform:scale(1.04);box-shadow:0 0 0 2px #1E3E3B,0 0 0 4px #fff}
 
@@ -144,8 +145,8 @@ html.nb-keep .nb-tile.nb-open .nb-shot img{transform:scale(1.06)}
 .nb-pricebar{position:absolute;left:0;right:0;bottom:0;height:92px;background:#F3F1EC;
   border-top:1px solid #E3E1DC;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
 .nb-pricebar .nb-pn{display:block;font-weight:500;font-size:11px;line-height:14px;letter-spacing:.055em;color:#282828}
-.nb-pricebar .nb-pp{display:block;font-weight:500;font-size:27px;line-height:32px;letter-spacing:.02em;color:#282828}
-.nb-pricebar .nb-pp s{font-weight:400;font-size:14px;letter-spacing:.05em;color:#7C7C7C;margin-right:7px;
+.nb-pricebar .nb-pp{display:block;font-weight:500;font-size:27px;line-height:32px;letter-spacing:.055em;color:#282828}
+.nb-pricebar .nb-pp s{font-weight:400;font-size:14px;letter-spacing:.055em;color:#7C7C7C;margin-right:7px;
   text-decoration:none;position:relative}
 .nb-pricebar .nb-pp s:after{content:"";position:absolute;left:0;top:52%;height:1.5px;width:0;
   background:#7C7C7C;transition:width .42s ease}
@@ -154,7 +155,7 @@ html.nb-struck .nb-pricebar .nb-pp s:after{width:100%}
 html.nb-struck .nb-pricebar .nb-pp i{opacity:1}
 .nb-tapdisc{position:absolute;left:50%;top:180px;transform:translateX(-50%);z-index:4;border:0;
   cursor:pointer;background:#054B48;color:#fff;border-radius:22px;padding:0 15px;height:34px;
-  font-weight:700;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+  font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
   box-shadow:0 5px 16px rgba(0,0,0,.22);transition:transform .2s ease,opacity .2s ease}
 .nb-tapdisc.nb-open{transform:translateX(-50%) scale(.96);opacity:0}
 /* a hotspot has to read as something to press, not as a speck on the case */
@@ -174,7 +175,7 @@ html.nb-struck .nb-pricebar .nb-pp i{opacity:1}
   transition:opacity .26s ease,transform .26s ease}
 .nb-stamp.nb-vis{opacity:1;transform:translateY(0) scale(1)}
 .nb-stamp b{display:block;max-width:100px;font-weight:700;font-size:10px;line-height:12px;
-  letter-spacing:.04em;text-transform:uppercase;color:#fff;background:#172D2B;padding:4px 7px;
+  letter-spacing:.1em;text-transform:uppercase;color:#fff;background:#172D2B;padding:4px 7px;
   border-radius:3px}
 .nb-stamp.nb-wide b{max-width:none;white-space:nowrap}
 .nb-stamp b i{font-style:normal;color:#9FC4BE}
@@ -186,7 +187,7 @@ html.nb-struck .nb-pricebar .nb-pp i{opacity:1}
 .nb-cw.nb-vis{opacity:1}
 .nb-cwname{position:absolute;left:0;right:0;top:200px;height:17px;text-align:center}
 .nb-cwname span{position:absolute;left:0;right:0;top:0;font-weight:500;font-size:12px;line-height:17px;
-  letter-spacing:.09em;color:#282828;opacity:0;transition:opacity .2s ease}
+  letter-spacing:.055em;color:#282828;opacity:0;transition:opacity .2s ease}
 .nb-cwname span.nb-vis{opacity:1}
 /* twelve swatches on ONE row: wrapping put the second row under the price bar, where its
    taps never landed and the card could not finish */
@@ -209,13 +210,13 @@ html.nb-struck .nb-pricebar .nb-pp i{opacity:1}
 /* ---------- pick a card (the brand's own getaway page) ---------- */
 .nb-pick{position:absolute;inset:0;border-radius:10px;overflow:hidden;background:#F6F3EC;
   display:flex;flex-direction:column;align-items:center;padding:12px 10px 10px}
-.nb-pickh{font-weight:700;font-size:21px;line-height:25px;letter-spacing:.055em;text-transform:uppercase;
+.nb-pickh{font-weight:700;font-size:21px;line-height:25px;letter-spacing:.1em;text-transform:uppercase;
   color:#054B48;text-align:center}
-.nb-picks{margin-top:3px;font-weight:500;font-size:11.5px;line-height:15px;letter-spacing:normal;
+.nb-picks{margin-top:3px;font-weight:500;font-size:11.5px;line-height:15px;letter-spacing:.055em;
   color:rgba(40,40,40,.74);text-align:center;transition:color .25s ease}
 html.nb-won .nb-picks{color:#054B48;font-weight:600}
-.nb-pgrid{margin-top:9px;display:grid;grid-template-columns:repeat(3,94px);grid-template-rows:repeat(3,74px);
-  gap:7px;flex:0 0 auto}
+.nb-pgrid{margin-top:10px;display:grid;grid-template-columns:repeat(3,102px);
+  grid-template-rows:repeat(3,100px);gap:8px;flex:0 0 auto}
 .nb-pc{position:relative;border:0;padding:0;background:none;cursor:pointer;
   perspective:560px;-webkit-perspective:560px}
 .nb-pcf,.nb-pcb{position:absolute;inset:0;border-radius:7px;overflow:hidden;
@@ -229,15 +230,15 @@ html.nb-won .nb-picks{color:#054B48;font-weight:600}
 .nb-pc.nb-open .nb-pcf{transform:rotateY(-180deg);opacity:0;transition:transform .40s ease,opacity .1s .26s}
 .nb-pc.nb-open .nb-pcb{transform:rotateY(0deg)}
 .nb-pc .nb-pcimg{flex:1 1 auto;min-height:0;width:100%;display:block;object-fit:contain}
-.nb-pc .nb-pcn{flex:0 0 auto;display:block;font-weight:500;font-size:8.5px;line-height:10px;
-  letter-spacing:.02em;color:#282828;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.nb-pc .nb-pcv{position:absolute;left:4px;top:4px;z-index:2;font-weight:600;font-size:8.5px;line-height:10px;
+.nb-pc .nb-pcn{flex:0 0 auto;display:block;font-weight:500;font-size:9.5px;line-height:11px;
+  letter-spacing:.055em;color:#282828;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.nb-pc .nb-pcv{position:absolute;left:5px;top:5px;z-index:2;font-weight:600;font-size:9.5px;line-height:11px;letter-spacing:.055em;
   color:#fff;background:#054B48;border-radius:9px;padding:2px 6px;white-space:nowrap}
 .nb-pc.nb-win .nb-pcb{border-color:#054B48;box-shadow:0 0 0 1.5px #054B48}
 .nb-pcmiss{background:#F7F7F5}
 .nb-pcmiss .nb-pcimg{opacity:.22;padding:10px 14px}
 .nb-pcmiss .nb-pcn{color:rgba(40,40,40,.55)}
-.nb-ptot{margin-top:auto;flex:0 0 auto;font-weight:600;font-size:10px;line-height:13px;letter-spacing:.06em;
+.nb-ptot{margin-top:auto;flex:0 0 auto;font-weight:600;font-size:10px;line-height:13px;letter-spacing:.1em;
   text-transform:uppercase;color:rgba(40,40,40,.6);padding-bottom:1px}
 
 /* ---------- piece chips (the bundle) ---------- */
@@ -248,16 +249,16 @@ html.nb-won .nb-picks{color:#054B48;font-weight:600}
 .nb-piece.nb-open{border-color:#054B48;box-shadow:0 0 0 1.5px #054B48 inset}
 .nb-piece img{flex:0 0 auto;width:34px;height:34px;object-fit:contain;display:block}
 .nb-piece .nb-ptx{flex:1 1 auto;min-width:0}
-.nb-piece .nb-pnm{display:block;font-weight:500;font-size:10px;line-height:12px;letter-spacing:.05em;
+.nb-piece .nb-pnm{display:block;font-weight:500;font-size:10px;line-height:12px;letter-spacing:.055em;
   color:#282828;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nb-piece .nb-pvl{display:block;margin-top:2px;font-weight:700;font-size:10px;line-height:12px;
-  letter-spacing:.04em;text-transform:uppercase;color:#7C7C7C;transition:color .2s ease}
+  letter-spacing:.1em;text-transform:uppercase;color:#7C7C7C;transition:color .2s ease}
 .nb-piece.nb-open .nb-pvl{color:#054B48}
 
 /* ---------- match 3 (the site's Black Friday Offer pop-up) ---------- */
 .nb-pop{position:absolute;inset:0;overflow:hidden;background:#fff;border:1px solid #E3E1DC;border-radius:10px}
 .nb-rib{position:absolute;left:-30%;width:160%;height:21px;display:flex;align-items:center;
-  white-space:nowrap;overflow:hidden;font-weight:700;font-size:9px;letter-spacing:.09em;
+  white-space:nowrap;overflow:hidden;font-weight:700;font-size:9px;letter-spacing:.1em;
   text-transform:uppercase;color:#fff}
 .nb-rib span{padding:0 6px}
 .nb-r1{top:-6px;left:-50%;width:70%;transform:rotate(-15deg);background:#9AA3A1}
@@ -266,11 +267,11 @@ html.nb-won .nb-picks{color:#054B48;font-weight:600}
 .nb-r4{bottom:-8px;left:auto;right:-50%;width:70%;transform:rotate(-15deg);background:#172D2B}
 .nb-popin{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;
   align-items:center;padding:12px 10px 0}
-.nb-poph{font-weight:500;font-size:20px;line-height:25px;letter-spacing:.06em;color:#282828;text-align:center}
-.nb-pops{margin-top:4px;font-weight:400;font-size:10.5px;line-height:13px;letter-spacing:.05em;
+.nb-poph{font-weight:500;font-size:20px;line-height:25px;letter-spacing:.055em;color:#282828;text-align:center}
+.nb-pops{margin-top:4px;font-weight:400;font-size:10.5px;line-height:13px;letter-spacing:.055em;
   color:#7C7C7C;text-align:center}
-.nb-mgrid{margin-top:8px;display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);
-  gap:7px;flex:0 0 auto}
+.nb-mgrid{margin-top:10px;display:grid;grid-template-columns:repeat(3,62px);grid-template-rows:repeat(3,62px);
+  gap:8px;flex:0 0 auto}
 /* the two cases sit UNDER the grid, whole and unobscured: a game must not hide the product */
 .nb-popfoot{margin-top:auto;width:100%;flex:0 0 auto;display:flex;align-items:flex-end;
   justify-content:center;gap:10px;padding-bottom:2px}
@@ -285,27 +286,27 @@ html.nb-won .nb-picks{color:#054B48;font-weight:600}
   color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
   backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);
   transition:transform .36s ease}
-.nb-mb b{display:block;font-weight:700;font-size:15px;line-height:16px;letter-spacing:-.02em}
+.nb-mb b{display:block;font-weight:700;font-size:15px;line-height:16px;letter-spacing:.055em}
 .nb-mb i{display:block;font-style:normal;font-weight:600;font-size:7.5px;line-height:9px;
-  letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+  letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.8)}
 .nb-mc.nb-open .nb-mf{transform:rotateY(-180deg);opacity:0;transition:transform .36s ease,opacity .1s .2s}
 .nb-mc.nb-open .nb-mb{transform:rotateY(0deg)}
 .nb-mc[data-win="0"].nb-open .nb-mb{background:#8A918F;border-color:#8A918F}
 .nb-mgrid.nb-won .nb-mc[data-win="1"] .nb-mb{box-shadow:0 0 0 2px #fff,0 0 0 4px #054B48}
 .nb-pops{transition:color .25s ease,font-weight .25s ease}
 html.nb-matched .nb-pops{color:#054B48;font-weight:700;font-size:11px}
-.nb-deal b{display:block;font-weight:700;font-size:17px;line-height:19px;letter-spacing:-.01em}
+.nb-deal b{display:block;font-weight:700;font-size:17px;line-height:19px;letter-spacing:.055em}
 .nb-deal i{display:block;font-style:normal;margin-top:1px;font-weight:600;font-size:9.5px;line-height:11px;
-  letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.88)}
+  letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.88)}
 
 
 /* ---------- chrome ---------- */
 .nb-chiprow{position:absolute;left:12px;right:12px;top:558px;height:18px;z-index:6}
 .nb-hint{position:absolute;left:50%;top:0;transform:translateX(-50%);height:18px;padding:0 11px;
   border-radius:9px;background:#282828;color:#fff;font-weight:600;font-size:9.5px;line-height:18px;
-  letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+  letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
 .nb-cta{position:absolute;left:12px;right:12px;top:586px;height:42px;z-index:8;border:0;
-  border-radius:4px;font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;
+  border-radius:4px;font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
   cursor:pointer;display:flex;align-items:center;justify-content:center;background:#054B48;color:#fff}
 .nb-hit{position:absolute;left:0;right:0;top:213.34px;bottom:0;z-index:7;background:transparent;
   pointer-events:none}
@@ -319,7 +320,7 @@ html.done .nb-tile,html.done .nb-tier,html.done .nb-piece,html.done .nb-mc,html.
 <body>
 <div id="nb-fit"><div class="nb-card">
   <div class="nb-bar">
-    <span class="nb-bt"><b id="nb-camp">Black Friday Sale</b>Up to 67% Off</span>
+    <span class="nb-bt"><b id="nb-camp">Black Friday Sale</b>Up to 67% Off Sitewide</span>
     <span class="nb-cd" id="nb-cd">
       <span class="nb-u"><span class="nb-n" data-u="h">09</span><span class="nb-l">Hrs</span></span>
       <span class="nb-sep">:</span>
@@ -340,7 +341,7 @@ html.done .nb-tile,html.done .nb-tier,html.done .nb-piece,html.done .nb-mc,html.
 </div></div>
 <script>
 (function(){
-  var DATA = {"url": "https://nobltravel.com/collections/black-friday-sale", "doneHint": "Tap to shop", "deal": null, "need": null, "wonLine": null};
+  var DATA = {"url": "https://nobltravel.com/collections/black-friday-sale", "doneHint": "Tap to shop", "deal": null, "need": null, "wonLine": null, "footTpl": null};
   var CLICK = DATA.url;
   function openLP(){
     try{
@@ -475,6 +476,7 @@ html.done .nb-tile,html.done .nb-tier,html.done .nb-piece,html.done .nb-mc,html.
     var cards = [].slice.call(grid.querySelectorAll('.nb-pc'));
     var wins = 0, flips = 0, lock = false;
     var sub = document.getElementById('nb-picks');
+    var tot = document.getElementById('nb-ptot');
     cards.forEach(function(c){
       c.addEventListener('click', function(ev){
         ev.preventDefault(); ev.stopPropagation();
@@ -482,6 +484,10 @@ html.done .nb-tile,html.done .nb-tier,html.done .nb-piece,html.done .nb-mc,html.
         c.classList.add('nb-open');
         flips++;
         if (c.classList.contains('nb-win')) wins++;
+        /* the running count, so the footer never claims gifts that are still face down */
+        if (tot && DATA.footTpl){
+          tot.textContent = DATA.footTpl.replace('%d', wins);
+        }
         if (wins >= (DATA.need || 4)){
           lock = true;
           /* the prompt answers itself with the total, in place, the way the page does */
