@@ -79,7 +79,7 @@ function show(i){cur=(i+D.length)%D.length;trk.style.transform='translateX('+(-1
  document.getElementById('clr').textContent=D[cur].n;document.getElementById('was').textContent='$'+D[cur].c;document.getElementById('now').textContent='$'+D[cur].p;document.getElementById('off').textContent=D[cur].o+'% off';
  if(document.documentElement.classList.contains('done'))return;
  if(!seen[cur]){seen[cur]=1;n++;}
- if(n<D.length){document.getElementById('hint').textContent='Swipe all 5 colors · '+n+'/5';}else{finish();}}
+ if(n<D.length){document.getElementById('hint').textContent='Swipe all '+D.length+' colors · '+n+'/'+D.length;}else{finish();}}
 document.querySelector('.arw.l').addEventListener('click',function(e){e.stopPropagation();show(cur-1);});
 document.querySelector('.arw.r').addEventListener('click',function(e){e.stopPropagation();show(cur+1);});
 var sx=null,sy=0,moved=false;
